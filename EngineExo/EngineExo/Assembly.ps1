@@ -20,21 +20,26 @@ Get-ChildItem $path -Recurse -Filter *.h |
         $isObject = $false
         Foreach($line in Get-Content $fullPath)
         {
-            $str = "";
-            $name = "";
-            $public = false;
-            $Static = false;
-            $Array = false;
+            $str = ""
+            $name = ""
 
             if (-ne $line -match "UCLASS")
             {
-                continue;
+                continue
+            } 
+            if ($line -match "public")
+            {
+                public = "BindingFlags::Public"
+            }
+            if ($line _math "private:" -or $line -match "protected:")
+            {
+                public = "BindingFlags::NoPublic"
             }
             else
             {
                 if ($line -match "UPROPERTY")
                 {
-                    $str = "";
+                    
                 }
             }
         }

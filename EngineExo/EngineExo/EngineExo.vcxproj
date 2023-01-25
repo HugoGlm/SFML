@@ -113,6 +113,9 @@
       <AdditionalLibraryDirectories>../SFML-2.5.1/lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -File $(ProjectDir)\Assembly.ps1 -path $(ProjectDir)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -133,6 +136,9 @@
       <AdditionalLibraryDirectories>../SFML-2.5.1/lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -File $(ProjectDir)\Assembly.ps1 -path $(ProjectDir)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine\GameObject\GameObject.cpp" />
