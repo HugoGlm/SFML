@@ -10,7 +10,7 @@ namespace Engine::PrimaryType
 		DECLARE_CLASS_INFO(String, ValueType)
 #pragma region f/p
 	private:
-		const char* value = nullptr;
+		UPROPERTY() const char* value = nullptr;
 		int length = 0;
 #pragma endregion
 #pragma region constructor

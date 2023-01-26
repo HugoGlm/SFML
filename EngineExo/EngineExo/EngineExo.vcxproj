@@ -114,7 +114,7 @@
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>powershell.exe -File $(ProjectDir)\Assembly.ps1 -path $(ProjectDir)</Command>
+      <Command>powershell.exe -ExecutionPolicy Bypass -File Reflection.ps1  -path $(ProjectDir)</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,10 +137,11 @@
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>powershell.exe -File $(ProjectDir)\Assembly.ps1 -path $(ProjectDir)</Command>
+      <Command>powershell.exe -ExecutionPolicy Bypass -File Reflection.ps1  -path $(ProjectDir)</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Test\ATest.cpp" />
     <ClCompile Include="Engine\GameObject\GameObject.cpp" />
     <ClCompile Include="Engine\Reflection\Field\FieldInfo.cpp" />
     <ClCompile Include="Engine\Reflection\Function\ParameterInfo\ParameterInfo.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Test\PrimaryType\Integer\IntegerTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Test\ATest.h" />
     <ClInclude Include="Engine\Event\Action\Action.h" />
     <ClInclude Include="Engine\Event\Delegate\Delegate.h" />
     <ClInclude Include="Engine\Reflection\Flags\BindingFlags.h" />
@@ -188,7 +190,9 @@
     <ClInclude Include="Test\PrimaryType\Integer\IntegerTest.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assembly.ps1" />
+    <None Include="Function.ps1" />
+    <None Include="Reflection.ps1" />
+    <None Include="ScriptLaunch.ps1" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

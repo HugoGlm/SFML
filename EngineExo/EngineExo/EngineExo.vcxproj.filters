@@ -69,6 +69,9 @@
     <ClCompile Include="Engine\Reflection\Function\Function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Test\ATest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Object\Object.h">
@@ -146,8 +149,13 @@
     <ClInclude Include="Engine\Reflection\Function\Function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Test\ATest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assembly.ps1" />
+    <None Include="Reflection.ps1" />
+    <None Include="Function.ps1" />
+    <None Include="ScriptLaunch.ps1" />
   </ItemGroup>
 </Project>

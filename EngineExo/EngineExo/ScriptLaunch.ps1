@@ -1,0 +1,4 @@
+Param(
+    [parameter()]
+    [String]$path
+)

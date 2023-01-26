@@ -11,7 +11,7 @@
 #define UPROPERTY(...)
 #define UCLASS(...)
 
-#define REGISTER_FIELD(name, field, flags) const int field##name = InsertField(#name, field, flags);
+#define REGISTER_FIELD(name, field, flags) const int Field##name = InsertField(#name, field, flags);
 #define REGISTER_METHOD(name, method, params, flags) const int Method##name = InsertMethod(#name, method, params, flags);
 
 #define DECLARE_CLASS_INFO_FLAGS(current, parent, flags)\
