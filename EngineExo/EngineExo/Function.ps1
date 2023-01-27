@@ -1,4 +1,0 @@
-Param(
-    [parameter()]
-    [String]$path
-)

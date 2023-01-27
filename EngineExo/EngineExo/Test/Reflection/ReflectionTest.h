@@ -10,11 +10,8 @@ namespace Test
 	{
 	private:
 		Engine::PrimaryType::String name = "Toto";
-		REGISTER_FIELD(name, &name, BindingFlags::NoPublic)
 	public:
 		Engine::PrimaryType::Integer age = 24;
-		REGISTER_FIELD(age, &age, BindingFlags::Public)
-
 			void Update();
 		REGISTER_METHOD(Update, &ReflectionTest::Update, {}, BindingFlags::Public)
 			void Display(const std::string& _msg);
