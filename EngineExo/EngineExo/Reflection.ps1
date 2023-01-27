@@ -1,6 +1,6 @@
-Param(
-    [parameter()]
-    [String]$path
+param(
+    [Parameter()]
+    [string]$path
 )
 
 powershell.exe -ExecutionPolicy Bypass -File ReflectionProperty.ps1 -path $path

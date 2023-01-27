@@ -1,5 +1,4 @@
 #include "ParameterInfo.h"
-#include "../../../PrimaryType/String/String.h"
 #include <format>
 
 #pragma region constructor
@@ -20,11 +19,3 @@ int Engine::Reflection::ParameterInfo::Position() const
 	return position;
 }
 #pragma endregion
-
-#pragma region override
-Engine::PrimaryType::String Engine::Reflection::ParameterInfo::ToString() const
-{
-	return std::format("Name: {}, Position: {}", name, position).c_str();
-}
-#pragma endregion
-

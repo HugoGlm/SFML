@@ -190,8 +190,8 @@
     <ClInclude Include="Test\PrimaryType\Integer\IntegerTest.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReflectionFunction.ps1" />
     <None Include="Reflection.ps1" />
+    <None Include="ReflectionFunction.ps1" />
     <None Include="ReflectionProperty.ps1" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -62,7 +62,7 @@ Engine::PrimaryType::Boolean Engine::PrimaryType::String::Contains(const String&
 	const std::string& _string = value;
 	return _string.find(_str.value) != std::string::npos;
 }
-Engine::PrimaryType::Boolean Engine::PrimaryType::String::IsNulOrEmpty(const String& _str)
+Engine::PrimaryType::Boolean Engine::PrimaryType::String::IsNullOrEmpty(const String& _str)
 {
 	return _str.value == nullptr || _str.length == 0;
 }

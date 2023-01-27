@@ -27,7 +27,7 @@ namespace Engine::PrimaryType
 		Boolean EndWith(const String& _str) const;
 		Boolean EqualsIgnoreCase(const String& _str) const;
 		Boolean Contains(const String& _str) const;
-		static Boolean IsNulOrEmpty(const String& _str);
+		UFONCTION() static Boolean IsNullOrEmpty(const String& _str)
 		String ToLower() const;
 		String ToUpper() const;
 		String SubString(int _begin) const;

@@ -2,6 +2,7 @@
 #include "../PrimaryType/Enum/Enum.h"
 #include "../Reflection/Flags/BindingFlags.h"
 #include "../Reflection/Function/Method/MethodInfo.h"
+#include "../Reflection/Function/ParameterInfo/ParameterInfo.h"
 #include <format>
 
 #pragma warning(disable: 4996)
@@ -81,6 +82,9 @@ namespace Engine
 		template<typename Res, typename Class, typename... Params>
 		size_t InsertMethod(const std::string& _name, Res(Class::* ptr)(Params...), const std::vector<Reflection::ParameterInfo*>& _params, const BindingFlags& _flags);
 
+		template<typename Res,  typename... Params>
+		size_t InsertMethod(const std::string& _name, Res(*ptr)(Params...), const std::vector<Reflection::ParameterInfo*>& _params, const BindingFlags& _flags);
+
 		int InsertField(const std::string& _name, Object* _var, const BindingFlags& _flags);
 #pragma endregion
 #pragma region operator
@@ -123,6 +127,15 @@ namespace Engine
 	}
 	template<typename Res, typename Class, typename... Params>
 	size_t Object::InsertMethod(const std::string& _name, Res(Class::* ptr)(Params...), const std::vector<Reflection::ParameterInfo*>& _params, const BindingFlags& _flags)
+	{
+		if (functions.contains(_name))
+			return functions.size();
+		Reflection::MethodInfo<Res, Params...>* _function = new Reflection::MethodInfo<Res, Params...>(_name, ptr, _params, _flags);
+		functions.insert(std::pair(_name, _function));
+		return functions.size();
+	}
+	template<typename Res, typename... Params>
+	size_t Object::InsertMethod(const std::string& _name, Res(*ptr)(Params...), const std::vector<Reflection::ParameterInfo*>& _params, const BindingFlags& _flags)
 	{
 		if (functions.contains(_name))
 			return functions.size();

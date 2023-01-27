@@ -1,10 +1,9 @@
 #pragma once
-#include "../../../Object/Object.h"
 #include <string>
 
 namespace Engine::Reflection
 {
-	struct ParameterInfo : public Object
+	struct ParameterInfo
 	{
 #pragma region f/p
 	private:
@@ -21,10 +20,6 @@ namespace Engine::Reflection
 	public:
 		std::string Name() const;
 		int Position() const;
-#pragma endregion
-#pragma region override
-	public:
-		PrimaryType::String ToString() const override;
 #pragma endregion
 
 	};

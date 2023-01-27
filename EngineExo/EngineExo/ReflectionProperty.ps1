@@ -1,21 +1,20 @@
-Param(
-    [parameter()]
+param(
+    [Parameter()]
     [String]$path
 )
 
 function IsPublic
 {
-   param([string]$line, [boolean]$result)
-   
-   if ($line.Contains("public:"))
-   {
-       return $true
-   }
-   elseif ($line.Contains("private:") -or $line.Contains("protected:")) 
-   {
-       return $false
-   }
-   return $result
+    param([string]$line, [boolean]$result)
+    if ($line.Contains("public:"))
+    {
+        return $true
+    }
+    elseif ($line.Contains("private:") -or $line.Contains("protected:"))
+    {
+        return $false
+    }
+    return $result
 }
 
 function AddFlag
@@ -25,7 +24,7 @@ function AddFlag
     {
         return $currentFlag
     }
-    if  ([string]::IsNullOrEmpty($currentFlag))
+    if ([string]::IsNullOrEmpty($currentFlag))
     {
         return "BindingFlags::$newFlag"
     }
@@ -35,18 +34,19 @@ function AddFlag
 function ReplaceStr
 {
     param([string]$str, [string[]]$toReplace, [string]$to)
-    for ($i = 0; $i -lt $toReplace.Count; $i = $i +1)
+    $count = $toReplace.Count
+    for ($i = 0; $i -lt $toReplace.Count; $i = $i + 1)
     {
         $str = $str.Replace($toReplace[$i], $to)
     }
     return $str
 }
 
-Get-ChildItem $path -Recurse -Filter *.h | 
-        Foreach-Object {
+Get-ChildItem $path -Recurse -Filter *.h |
+        ForEach-Object {
             $scriptPath = $_.FullName
             $className = (Get-Item $scriptPath).BaseName
-            $fileContent = Get-Content -Path $scriptPath
+            $fileContents = Get-Content -Path $scriptPath
             $isPublic = $false
             $isObject = $false
             $flags = ""
@@ -57,27 +57,27 @@ Get-ChildItem $path -Recurse -Filter *.h |
                 return
             }
 
-            for ($i = 0; $i -lt $fileContent.Count; $i = $i + 1) 
+            for ($i = 0; $i -lt $fileContents.Count; $i = $i + 1)
             {
-                $line = $fileContent[$i]
+                $line = $fileContents[$i]
 
                 if ($line -match "UCLASS\(\)")
                 {
                     $isObject = $true
                 }
-
+                
                 if ($isObject -eq $false)
                 {
                     continue
                 }
-            
+
                 if ( [string]::IsNullOrEmpty($line))
                 {
                     continue
                 }
-            
+
                 $isPublic = IsPublic -line $line -result $isPublic
-            
+
                 if ($line -match "UPROPERTY\(\)")
                 {
                     $flags = ""
@@ -89,17 +89,17 @@ Get-ChildItem $path -Recurse -Filter *.h |
                     {
                         $flags = AddFlag -currentFlag $flags -newFlag "NoPublic"
                     }
-                    if ($line.Contains("static"))
+                    if ( $line.Contains("static"))
                     {
                         $flags = AddFlag -currentFlag $flags -newFlag "Static"
                     }
                     $isPointer = $line.Contains("*")
-            
+
                     $field = ReplaceStr -str $line -toReplace @("inline", "const", "static", "constexpr", "UPROPERTY()") -to ""
                     $field = $field.TrimStart()
                     $field = $field.Substring($field.IndexOf(' ') + 1)
-                    $field = $field.Substring(0, $field.IndexOf(' ')).Trim()
-            
+                    $field = $field.Substring(0,$field.IndexOf(' ')).Trim()
+
                     $result = ""
                     if ($isPointer)
                     {
@@ -109,11 +109,10 @@ Get-ChildItem $path -Recurse -Filter *.h |
                     {
                         $result = "REGISTER_FIELD($field, &$field, $flags)"
                     }
-                    
                     $file = (Get-Content $scriptPath) -as [Collections.ArrayList]
-                    if ($fileContent[$i + 1] -match "REGISTER_FIELD")
+                    if ($fileContents[$i + 1] -match "REGISTER_FIELD")
                     {
-                        $file.RemoveAt($i + 1)
+                        $file.Remove($fileContents[$i + 1])
                         $file.Insert($i + 1, $result)
                     }
                     else
@@ -123,11 +122,16 @@ Get-ChildItem $path -Recurse -Filter *.h |
                     }
                     $file | Set-Content $scriptPath
                 }
-            
-                if ($line -match "REGISTER_FIELD" -and $fileContent[$i - 1] -notmatch "UPROPERTY")
+            }
+            $index = 0
+            for ($i = 0; $i -lt $fileContents.Count; $i = $i + 1)
+            {
+                $line = $fileContents[$i]
+                if ($line -match "REGISTER_FIELD" -and $fileContents[$i - 1] -notmatch "UPROPERTY")
                 {
                     $file = (Get-Content $scriptPath) -as [Collections.ArrayList]
-                    $file.RemoveAt($i)
+                    $file.RemoveAt($i - $index)
+                    $index = $index + 1
                     $file | Set-Content $scriptPath
                 }
             }
