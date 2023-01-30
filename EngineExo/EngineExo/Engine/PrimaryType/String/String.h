@@ -11,7 +11,7 @@ namespace Engine::PrimaryType
 #pragma region f/p
 	private:
 		const char* value = nullptr;
-		int length = 0;
+		size_t length = 0;
 #pragma endregion
 #pragma region constructor
 	public:
@@ -27,11 +27,12 @@ namespace Engine::PrimaryType
 		Boolean EndWith(const String& _str) const;
 		Boolean EqualsIgnoreCase(const String& _str) const;
 		Boolean Contains(const String& _str) const;
-		UFONCTION() static Boolean IsNullOrEmpty(const String& _str)
+		UFUNCTION() static Boolean IsNullOrEmpty(const String& _str);
+REGISTER_METHOD(IsNullOrEmpty, &String::IsNullOrEmpty, (std::vector<Engine::Reflection::ParameterInfo*>{new Engine::Reflection::ParameterInfo("_str", 0)}), BindingFlags::Public | BindingFlags::Static)
 		String ToLower() const;
 		String ToUpper() const;
-		String SubString(int _begin) const;
-		String SubString(int _begin, int _end) const;
+		String SubString(size_t _begin) const;
+		String SubString(size_t _begin, size_t _end) const;
 		String Replace(const String& _old, const String& _new) const;
 		String Replace(char _old, char _new);
 		String Trim() const;
@@ -45,12 +46,16 @@ namespace Engine::PrimaryType
 #pragma endregion
 #pragma region operator
 	public:
-		Object& operator=(const Object* _other);
+		String& operator+=(const char* _str);
+		String& operator+=(const String& _str);
 		String& operator=(const String& _other);
+		Object& operator=(const Object* _other);
 		operator const char* ();
 		operator const char* () const;
-		Boolean operator==(const String& _str);
-		Boolean operator!=(const String& _str);
+		Boolean operator==(const String& _str) const;
+		Boolean operator!=(const String& _str) const;
+		Boolean operator==(const char* _str) const;
+		Boolean operator!=(const char* _str) const;
 #pragma endregion
 
 	};

@@ -20,6 +20,15 @@ Engine::GameObject::~GameObject()
 #pragma endregion
 
 #pragma region methods
+void Engine::GameObject::AddComponent(Engine::Component* _component)
+{
+	_component->gameobject = this;
+	components.Add(_component);
+}
+Engine::PrimaryType::List<Engine::Component*> Engine::GameObject::Components() const
+{
+	return components;
+}
 sf::Shape* Engine::GameObject::Shape() const
 {
 	return shape;

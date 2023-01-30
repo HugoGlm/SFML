@@ -18,13 +18,6 @@ void Test::ReflectionTest::Test()
 	ReflectionTest test = ReflectionTest();
 	test.Invoke<void>("Update");
 
-	Engine::Reflection::MethodInfo<void, std::string>* _method = test.GetFunction<void, std::string>("Display");
-	for (Engine::Reflection::ParameterInfo* _parameter : _method->Parameters())
-	{
-		LOG(_parameter)
-	}
-	_method->Invoke(&test, "salut salut");
-
 	/*ReflectionTest test = ReflectionTest();
 
 	Engine::Reflection::FieldInfo* _field = test.GetField("name");

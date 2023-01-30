@@ -37,7 +37,7 @@ Engine::PrimaryType::Boolean Engine::PrimaryType::String::EndWith(char _c) const
 }
 Engine::PrimaryType::Boolean Engine::PrimaryType::String::StartWith(const String& _str) const
 {
-	for (int i = 0; i < length; i++)
+	for (size_t i = 0; i < length; i++)
 		if (value[i] != _str.value[i])
 			return false;
 	return true;
@@ -45,11 +45,9 @@ Engine::PrimaryType::Boolean Engine::PrimaryType::String::StartWith(const String
 Engine::PrimaryType::Boolean Engine::PrimaryType::String::EndWith(const String& _str) const
 {
 	const size_t _otherLength = _str.length;
-	for (int i = _otherLength; i > 0; i++)
-	{
-		if (value[length - i] != _str.value[_otherLength - i]); 
+	for (size_t i = _otherLength; i > 0; i--)
+		if (value[length - i] != _str.value[_otherLength - i])
 			return false;
-	}
 	return true;
 }
 Engine::PrimaryType::Boolean Engine::PrimaryType::String::EqualsIgnoreCase(const String& _str) const
@@ -80,12 +78,12 @@ Engine::PrimaryType::String Engine::PrimaryType::String::ToUpper() const
 		_array[i] = std::toupper(value[i]);
 	return _array;
 }
-Engine::PrimaryType::String Engine::PrimaryType::String::SubString(int _begin) const
+Engine::PrimaryType::String Engine::PrimaryType::String::SubString(size_t _begin) const
 {
 	const std::string _result = value;
 	return _result.substr(_begin).c_str();
 }
-Engine::PrimaryType::String Engine::PrimaryType::String::SubString(int _begin, int _end) const
+Engine::PrimaryType::String Engine::PrimaryType::String::SubString(size_t _begin, size_t _end) const
 {
 	const std::string _result = value;
 	return _result.substr(_begin, _end).c_str();
@@ -171,6 +169,16 @@ Engine::Object& Engine::PrimaryType::String::operator=(const Object* _other)
 	length = _string->length;
 	return *this;
 }
+Engine::PrimaryType::String& Engine::PrimaryType::String::operator+=(const char* _str)
+{
+	Append(_str);
+	return *this;
+}
+Engine::PrimaryType::String& Engine::PrimaryType::String::operator+=(const String& _str)
+{
+	Append(_str);
+	return *this;
+}
 Engine::PrimaryType::String& Engine::PrimaryType::String::operator=(const String& _other)
 {
 	value = _other.value;
@@ -185,7 +193,7 @@ Engine::PrimaryType::String::operator const char* () const
 {
 	return value;
 }
-Engine::PrimaryType::Boolean Engine::PrimaryType::String::operator==(const String& _str)
+Engine::PrimaryType::Boolean Engine::PrimaryType::String::operator==(const String& _str) const
 {
 	if (length != _str.length)
 		return false;
@@ -194,7 +202,20 @@ Engine::PrimaryType::Boolean Engine::PrimaryType::String::operator==(const Strin
 			return false;
 	return true;
 }
-Engine::PrimaryType::Boolean Engine::PrimaryType::String::operator!=(const String& _str)
+Engine::PrimaryType::Boolean Engine::PrimaryType::String::operator!=(const String& _str) const
+{
+	return !this->operator==(_str);
+}
+Engine::PrimaryType::Boolean Engine::PrimaryType::String::operator==(const char* _str) const
+{
+	if (length != strlen(_str))
+		return false;
+	for (int i = 0; i < length; i++)
+		if (value[i] != _str[i])
+			return false;
+	return true;
+}
+Engine::PrimaryType::Boolean Engine::PrimaryType::String::operator!=(const char* _str) const
 {
 	return !this->operator==(_str);
 }

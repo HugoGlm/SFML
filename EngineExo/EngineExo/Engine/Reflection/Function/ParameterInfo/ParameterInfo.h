@@ -1,14 +1,15 @@
 #pragma once
+#include "../../../Utils/Interface/Log/ILogger.h"
 #include <string>
 
 namespace Engine::Reflection
 {
-	struct ParameterInfo
+	class ParameterInfo : public Interface::ILogger
 	{
 #pragma region f/p
 	private:
 		std::string name = "";
-		int position = 0;
+		size_t position = 0;
 #pragma endregion
 #pragma region constructor
 	public:
@@ -19,7 +20,11 @@ namespace Engine::Reflection
 #pragma region methods
 	public:
 		std::string Name() const;
-		int Position() const;
+		size_t Position() const;
+#pragma endregion
+#pragma region override
+	public:
+		PrimaryType::String ToString() const override;
 #pragma endregion
 
 	};

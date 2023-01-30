@@ -3,6 +3,7 @@
 #include "../Reflection/Flags/BindingFlags.h"
 #include "../Reflection/Function/Method/MethodInfo.h"
 #include "../Reflection/Function/ParameterInfo/ParameterInfo.h"
+#include "../Utils/Interface/Log/ILogger.h"
 #include <format>
 
 #pragma warning(disable: 4996)
@@ -12,8 +13,8 @@
 #define UPROPERTY(...)
 #define UCLASS(...)
 
-#define REGISTER_FIELD(name, field, flags) const int Field##name = InsertField(#name, field, flags);
-#define REGISTER_METHOD(name, method, params, flags) const int Method##name = InsertMethod(#name, method, params, flags);
+#define REGISTER_FIELD(name, field, flags) const size_t Field##name = InsertField(#name, (Object*)field, flags);
+#define REGISTER_METHOD(name, method, params, flags) const size_t Method##name = InsertMethod(#name, method, params, flags);
 
 #define DECLARE_CLASS_INFO_FLAGS(current, parent, flags)\
 	public:\
@@ -40,7 +41,7 @@ namespace Engine
 	{
 		class FieldInfo;
 	}
-	class Object
+	class Object : public Interface::ILogger
 	{
 #pragma region f/p
 	private:
@@ -85,7 +86,7 @@ namespace Engine
 		template<typename Res,  typename... Params>
 		size_t InsertMethod(const std::string& _name, Res(*ptr)(Params...), const std::vector<Reflection::ParameterInfo*>& _params, const BindingFlags& _flags);
 
-		int InsertField(const std::string& _name, Object* _var, const BindingFlags& _flags);
+		size_t InsertField(const std::string& _name, Object* _var, const BindingFlags& _flags);
 #pragma endregion
 #pragma region operator
 	public:

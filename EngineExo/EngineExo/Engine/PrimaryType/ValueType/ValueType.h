@@ -3,7 +3,7 @@
 
 namespace Engine::PrimaryType
 {
-	class ValueType : public Object
+	class ValueType : public Engine::Object
 	{
 		DECLARE_CLASS_INFO_FLAGS(ValueType, Object, ClassFlags::Type)
 #pragma region constructor

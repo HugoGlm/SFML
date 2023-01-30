@@ -18,5 +18,15 @@ std::vector<Engine::Reflection::ParameterInfo*> Engine::Reflection::Function::Pa
 {
 	return parameters;
 }
+Engine::PrimaryType::String Engine::Reflection::Function::ToString() const
+{
+	std::string _result = "Name: " + name + "\n";
+	for (const ParameterInfo* _parameter : parameters)
+	{
+		_result += _parameter->ToString();
+		_result += " ";
+	}
+	return _result.c_str();
+}
 #pragma endregion
 

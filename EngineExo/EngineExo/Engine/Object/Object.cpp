@@ -58,7 +58,7 @@ int Engine::Object::RegisterClassInfo(int _flags)
 {
 	return flags = _flags;
 }
-int Engine::Object::InsertField(const std::string& _name, Object* _var, const BindingFlags& _flags)
+size_t Engine::Object::InsertField(const std::string& _name, Object* _var, const BindingFlags& _flags)
 {
 	check(!fields.contains(_name), std::format("[Object][Reflexion] => {} already register in fields", _name), fields.size())
 		fields.insert(std::pair(_name, new Reflection::FieldInfo(_name.c_str(), _var, _flags)));

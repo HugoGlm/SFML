@@ -141,6 +141,10 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Window\Engine\EngineWindow.cpp" />
+    <ClCompile Include="Engine\Component\Component.cpp" />
+    <ClCompile Include="Engine\Manager\GameObject\GameObjectManager.cpp" />
+    <ClCompile Include="Test\PrimaryType\ListTest\ListTest.cpp" />
     <ClCompile Include="Test\ATest.cpp" />
     <ClCompile Include="Engine\GameObject\GameObject.cpp" />
     <ClCompile Include="Engine\Reflection\Field\FieldInfo.cpp" />
@@ -162,6 +166,16 @@
     <ClCompile Include="Test\PrimaryType\Integer\IntegerTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Window\Engine\EngineWindow.h" />
+    <ClInclude Include="Engine\Component\Component.h" />
+    <ClInclude Include="Engine\PrimaryType\List\IList.h" />
+    <ClInclude Include="Engine\PrimaryType\List\List.h" />
+    <ClInclude Include="Engine\Utils\CoreDefine.h" />
+    <ClInclude Include="Engine\Utils\Interface\Log\ILogger.h" />
+    <ClInclude Include="Engine\Utils\Template\Pointer.h" />
+    <ClInclude Include="Engine\Manager\GameObject\GameObjectManager.h" />
+    <ClInclude Include="Engine\Window\Window.h" />
+    <ClInclude Include="Test\PrimaryType\ListTest\ListTest.h" />
     <ClInclude Include="Test\ATest.h" />
     <ClInclude Include="Engine\Event\Action\Action.h" />
     <ClInclude Include="Engine\Event\Delegate\Delegate.h" />

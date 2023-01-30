@@ -8,14 +8,19 @@ Engine::Reflection::ParameterInfo::ParameterInfo(const std::string& _name, int _
 	position = _position;
 }
 #pragma endregion
+#include "../../../PrimaryType/String/String.h"
 
 #pragma region methods
 std::string Engine::Reflection::ParameterInfo::Name() const
 {
 	return name;
 }
-int Engine::Reflection::ParameterInfo::Position() const
+size_t Engine::Reflection::ParameterInfo::Position() const
 {
 	return position;
+}
+Engine::PrimaryType::String Engine::Reflection::ParameterInfo::ToString() const
+{
+	return std::format("Name: {}, Position: {}", name, position).c_str();
 }
 #pragma endregion
