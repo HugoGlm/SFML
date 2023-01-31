@@ -69,9 +69,6 @@
     <ClCompile Include="Engine\Reflection\Function\Function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test\ATest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Component\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -82,6 +79,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Window\Engine\EngineWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\Component\PlayerComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Transform\Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PrimaryType\Vector2\Vector2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\Reflection\Json\JsonTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -194,10 +203,26 @@
     <ClInclude Include="Engine\Window\Engine\EngineWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Test\Component\PlayerComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Transform\Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PrimaryType\Vector2\Vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Time\Time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\Reflection\Json\JsonTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Reflection.ps1" />
     <None Include="ReflectionFunction.ps1" />
     <None Include="ReflectionProperty.ps1" />
+    <None Include="..\a.asset" />
   </ItemGroup>
 </Project>

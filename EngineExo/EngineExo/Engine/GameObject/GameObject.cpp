@@ -1,21 +1,27 @@
 #include "GameObject.h"
 #include "../Utils/DebugMacro.h"
 #include "../PrimaryType/Boolean/Boolean.h"
+#include "../Manager/GameObject/GameObjectManager.h"
+#include "../Window/Engine/EngineWindow.h"
 
 #pragma region constructor
 Engine::GameObject::GameObject(const PrimaryType::String& _name) : super()
 {
 	name = _name;
+	transform = AddComponent<Transform>();
+	Manager::GameObjectManager::Instance()->Register(this);
 }
 Engine::GameObject::GameObject(const GameObject& _copy) : super(_copy)
 {
 	shape = _copy.shape;
 	name = _copy.name;
+	Manager::GameObjectManager::Instance()->Register(this);
 }
 Engine::GameObject::~GameObject()
 {
 	delete shape;
 	shape = nullptr;
+	Manager::GameObjectManager::Instance()->UnRegister(this);
 }
 #pragma endregion
 
@@ -51,6 +57,13 @@ Engine::GameObject* Engine::GameObject::CreatePrimitive(const PrimitiveType& _ty
 		break;
 	}
 	return _result;
+}
+void Engine::GameObject::Draw(const Window::EngineWindow* _window) const
+{
+	if (shape == nullptr)
+		return;
+	shape->setPosition(transform->position);
+	_window->Draw(shape);
 }
 #pragma endregion
 

@@ -3,12 +3,17 @@
 #include "../PrimaryType/String/String.h"
 #include "../PrimaryType/List/List.h"
 #include "../Component/Component.h"
+#include "../Transform/Transform.h"
 #include <SFML/Graphics.hpp>
 
 ENUM(PrimitiveType, Circle, Square)
 
 namespace Engine
 {
+	namespace Window
+	{
+		class EngineWindow;
+	}
 	UCLASS()
 	class GameObject : public Object
 	{
@@ -18,7 +23,9 @@ namespace Engine
 		PrimaryType::List<Component*> components = PrimaryType::List<Engine::Component*>();
 	protected:
 		sf::Shape* shape = nullptr;
+	public:
 		PrimaryType::String name = "";
+		Transform* transform = nullptr;
 #pragma endregion
 #pragma region constructor
 	public:
@@ -34,6 +41,7 @@ namespace Engine
 		sf::Shape* Shape() const;
 		void SetColor(const sf::Color& _color);
 		static GameObject* CreatePrimitive(const PrimitiveType& _type, const PrimaryType::String& _name);
+		void Draw(const Window::EngineWindow* _window) const;
 		template<typename T>
 		T* AddComponent();
 		template<typename T>
@@ -52,7 +60,7 @@ namespace Engine
 	{
 		static_assert(std::is_base_of_v<Component, T>, "T must be inherited of Component");
 		T* _component = new T();
-		_component->gameObject = this;
+		_component->gameobject = this;
 		components.Add(_component);
 		return _component;
 	}

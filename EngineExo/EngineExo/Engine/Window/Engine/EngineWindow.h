@@ -5,9 +5,13 @@ namespace Engine::Window
 {
 	class EngineWindow : public Window<EngineWindow>
 	{
+		DECLARE_CLASS_INFO(EngineWindow, Window<EngineWindow>)
 #pragma region f/p
 	private:
 		sf::Clock clock = sf::Clock();
+#pragma region constructor
+	public:
+		EngineWindow();
 #pragma endregion
 #pragma region override
 	public:

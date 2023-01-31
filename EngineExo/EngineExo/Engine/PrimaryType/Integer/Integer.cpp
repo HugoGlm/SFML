@@ -44,6 +44,16 @@ Engine::PrimaryType::String Engine::PrimaryType::Integer::ToString() const
 {
 	return std::to_string(value).c_str();
 }
+void Engine::PrimaryType::Integer::SerializeField(std::ostream& _os, const String& _fieldName)
+{
+	if (String::IsNullOrEmpty(_fieldName))
+		_os << std::string("\"") + ToString().ToCstr() + "\"";
+	else
+		_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
+}
+#pragma endregion
+
+#pragma region operator
 Engine::Object& Engine::PrimaryType::Integer::operator=(const Object* _other)
 {
 	if (!IsSame<Integer>(_other))
@@ -53,9 +63,6 @@ Engine::Object& Engine::PrimaryType::Integer::operator=(const Object* _other)
 	value = _integer->value;
 	return *this;
 }
-#pragma endregion
-
-#pragma region operator
 Engine::PrimaryType::Integer& Engine::PrimaryType::Integer::operator=(const Integer& _other)
 {
 	value = _other.value;

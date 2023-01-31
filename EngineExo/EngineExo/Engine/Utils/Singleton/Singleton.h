@@ -1,5 +1,6 @@
 #pragma once
 #include "../../Object/Object.h"
+#include "../../PrimaryType/String/String.h"
 
 namespace Engine::Utils
 {
@@ -34,21 +35,6 @@ namespace Engine::Utils
 			instance = nullptr;
 		}
 		virtual void OnDestroy() {}
-#pragma endregion
-#pragma region override
-	public:
-		PrimaryType::String ToString() const override
-		{
-			PrimaryType::String _result = "==========Window Settings==========\n";
-			_result += PrimaryType::String("Name: ");
-			_result += name;
-			_result += "\nWidth: ";
-			_result += width.ToString();
-			_result += "\nHeight: ";
-			_result += height.ToString();
-			_result += "\n===================================\n";
-			return _result;
-		}
 #pragma endregion
 
 	};

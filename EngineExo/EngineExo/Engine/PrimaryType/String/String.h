@@ -41,8 +41,12 @@ REGISTER_METHOD(IsNullOrEmpty, &String::IsNullOrEmpty, (std::vector<Engine::Refl
 		size_t Length() const; //TODO replace int width Integer class
 		void Append(const char* _str);
 		void Append(const String& _str);
-		String ToString() const override;
 		const char* ToCstr() const;
+#pragma endregion
+#pragma region override
+	public:
+		String ToString() const override;
+		void SerializeField(std::ostream& _os, const String& _fieldName) override;
 #pragma endregion
 #pragma region operator
 	public:

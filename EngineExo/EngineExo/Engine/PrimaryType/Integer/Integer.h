@@ -27,10 +27,11 @@ namespace Engine::PrimaryType
 #pragma region override
 	public:
 		String ToString() const override;
-		Object& operator=(const Object* _other) override;
+		void SerializeField(std::ostream& _os, const String& _fieldName) override;
 #pragma endregion
 #pragma region operator
 	public:
+		Object& operator=(const Object* _other) override;
 		Integer& operator=(const Integer& _other);
 		operator int();
 		operator int() const;

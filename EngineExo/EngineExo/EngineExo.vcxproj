@@ -144,8 +144,9 @@
     <ClCompile Include="Engine\Window\Engine\EngineWindow.cpp" />
     <ClCompile Include="Engine\Component\Component.cpp" />
     <ClCompile Include="Engine\Manager\GameObject\GameObjectManager.cpp" />
+    <ClCompile Include="Test\Reflection\Json\JsonTest.cpp" />
+    <ClCompile Include="Test\Component\PlayerComponent.cpp" />
     <ClCompile Include="Test\PrimaryType\ListTest\ListTest.cpp" />
-    <ClCompile Include="Test\ATest.cpp" />
     <ClCompile Include="Engine\GameObject\GameObject.cpp" />
     <ClCompile Include="Engine\Reflection\Field\FieldInfo.cpp" />
     <ClCompile Include="Engine\Reflection\Function\ParameterInfo\ParameterInfo.cpp" />
@@ -164,6 +165,8 @@
     <ClCompile Include="Engine\PrimaryType\Float\Float.cpp" />
     <ClCompile Include="Test\PrimaryType\Float\FloatTest.cpp" />
     <ClCompile Include="Test\PrimaryType\Integer\IntegerTest.cpp" />
+    <ClCompile Include="Engine\Transform\Transform.cpp" />
+    <ClCompile Include="Engine\PrimaryType\Vector2\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Window\Engine\EngineWindow.h" />
@@ -175,6 +178,8 @@
     <ClInclude Include="Engine\Utils\Template\Pointer.h" />
     <ClInclude Include="Engine\Manager\GameObject\GameObjectManager.h" />
     <ClInclude Include="Engine\Window\Window.h" />
+    <ClInclude Include="Test\Reflection\Json\JsonTest.h" />
+    <ClInclude Include="Test\Component\PlayerComponent.h" />
     <ClInclude Include="Test\PrimaryType\ListTest\ListTest.h" />
     <ClInclude Include="Test\ATest.h" />
     <ClInclude Include="Engine\Event\Action\Action.h" />
@@ -202,8 +207,12 @@
     <ClInclude Include="Engine\PrimaryType\Float\Float.h" />
     <ClInclude Include="Test\PrimaryType\Float\FloatTest.h" />
     <ClInclude Include="Test\PrimaryType\Integer\IntegerTest.h" />
+    <ClInclude Include="Engine\Transform\Transform.h" />
+    <ClInclude Include="Engine\PrimaryType\Vector2\Vector2.h" />
+    <ClInclude Include="Engine\Time\Time.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\a.asset" />
     <None Include="Reflection.ps1" />
     <None Include="ReflectionFunction.ps1" />
     <None Include="ReflectionProperty.ps1" />

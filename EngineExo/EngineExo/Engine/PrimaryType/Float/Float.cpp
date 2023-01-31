@@ -69,6 +69,13 @@ Engine::PrimaryType::String Engine::PrimaryType::Float::ToString() const
 		return "Negative Infinity";
 	return std::to_string(value).c_str();
 }
+void Engine::PrimaryType::Float::SerializeField(std::ostream& _os, const String& _fieldName)
+{
+	if (String::IsNullOrEmpty(_fieldName))
+		_os << std::string("\"") + ToString().ToCstr() + "\"";
+	else
+		_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
+}
 #pragma endregion
 
 #pragma region operator

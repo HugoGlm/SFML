@@ -33,6 +33,7 @@ y(0)
 }
 
 
+
 ////////////////////////////////////////////////////////////
 template <typename T>
 inline Vector2<T>::Vector2(T X, T Y) :
@@ -51,7 +52,6 @@ x(static_cast<T>(vector.x)),
 y(static_cast<T>(vector.y))
 {
 }
-
 
 ////////////////////////////////////////////////////////////
 template <typename T>

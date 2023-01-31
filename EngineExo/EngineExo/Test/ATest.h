@@ -1,8 +1,10 @@
 #pragma once
-#include "../Engine/Object/Object.h"
 #include "../Engine/PrimaryType/Integer/Integer.h"
+#include "../Engine/PrimaryType/Float/Float.h"
+#include "../Engine/PrimaryType/Boolean/Boolean.h"
+#include "../Engine/PrimaryType/Double/Double.h"
 #include "../Engine/PrimaryType/String/String.h"
-#include "../Engine/Reflection/Function/ParameterInfo/ParameterInfo.h"
+#include "../Engine/PrimaryType/Vector2/Vector2.h"
 
 namespace Test
 {
@@ -10,14 +12,17 @@ namespace Test
 	class ATest : public Engine::Object
 	{
 	private:
-		UPROPERTY() static inline Engine::PrimaryType::String name = "";
-REGISTER_FIELD(name, &name, BindingFlags::NoPublic | BindingFlags::Static)
-	public:
-		UPROPERTY() Engine::PrimaryType::Integer age = 0;
-REGISTER_FIELD(age, &age, BindingFlags::Public)
-
-	public:
-		UFUNCTION() void Test1(std::string t, size_t age);
-REGISTER_METHOD(Test1, &ATest::Test1, (std::vector<Engine::Reflection::ParameterInfo*>{new Engine::Reflection::ParameterInfo("t", 0),new Engine::Reflection::ParameterInfo("age", 1)}), BindingFlags::Public)
+	UPROPERTY() Engine::PrimaryType::Boolean boolean = false;
+REGISTER_FIELD(boolean, &boolean, BindingFlags::NoPublic)
+	UPROPERTY() Engine::PrimaryType::Double doublee = 0;
+REGISTER_FIELD(doublee, &doublee, BindingFlags::NoPublic)
+	UPROPERTY() Engine::PrimaryType::Float floatt = 0.0f;
+REGISTER_FIELD(floatt, &floatt, BindingFlags::NoPublic)
+	UPROPERTY() Engine::PrimaryType::Integer integer = 0;
+REGISTER_FIELD(integer, &integer, BindingFlags::NoPublic)
+	UPROPERTY() Engine::PrimaryType::String string = "";
+REGISTER_FIELD(string, &string, BindingFlags::NoPublic)
+	UPROPERTY() Engine::PrimaryType::Vector2 vector2 = Engine::PrimaryType::Vector2(0, 0);
+REGISTER_FIELD(vector2, &vector2, BindingFlags::NoPublic)
 	};
 }

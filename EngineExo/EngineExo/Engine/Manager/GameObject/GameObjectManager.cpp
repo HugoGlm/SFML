@@ -9,12 +9,14 @@ void Engine::Manager::GameObjectManager::UnRegister(GameObject* _object)
 {
 	std::erase(gameobjects, _object);
 }
-void Engine::Manager::GameObjectManager::Update()
+void Engine::Manager::GameObjectManager::Update() const
 {
 	for (GameObject* _gameobject : gameobjects)
 	{
 		for (Component* _component : _gameobject->Components())
 		{
+			if (_component == nullptr)
+				continue;
 			if (_component->enabled)
 			{
 				Reflection::MethodInfo<void>* _method = _component->GetFunction<void>("update");
@@ -24,6 +26,12 @@ void Engine::Manager::GameObjectManager::Update()
 			}
 		}
 	}
+}
+
+void Engine::Manager::GameObjectManager::Draw(const Window::EngineWindow* _window) const
+{
+	for (const GameObject* _object : gameobjects)
+		_object->Draw(_window);
 }
 
 void Engine::Manager::GameObjectManager::OnDestroy()

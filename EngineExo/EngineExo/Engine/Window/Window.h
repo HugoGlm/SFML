@@ -11,11 +11,10 @@ namespace Engine::Window
 	template<typename T>
 	class Window : public Engine::Utils::Singleton<T>
 	{
-		DECLARE_CLASS_INFO()
 #pragma region f/p
 		protected:
 			sf::RenderWindow* renderer = nullptr;
-			const char* name = "default window";
+			PrimaryType::String name = "default window";
 			PrimaryType::Integer width = 0;
 			PrimaryType::Integer height = 0;
 			PrimaryType::Boolean hasFocus = false;
@@ -47,17 +46,19 @@ namespace Engine::Window
 					if (hasFocus)
 						OnReceiveEvent(currentEvent);
 				}
+				OnUpdate();
 			}
 		}
-		void Setfocus(const sf::Event::EventType& _eventType)
+		void SetFocus(const sf::Event::EventType& _eventType)
 		{
 			hasFocus = _eventType == sf::Event::LostFocus ? false : true;
-			LOG_FORMAT("[Engine] Focus : ", hasFocus.ToString().ToCstr());
+			LOG_FORMAT("[Engine] Focus : {}", hasFocus.ToString().ToCstr());
 		}
 	public:
 		virtual void Open()
 		{
 			renderer = new sf::RenderWindow(sf::VideoMode(width, height), name.ToCstr());
+			SetFramesLimit(60);
 			Update();
 		}
 		void Close()
@@ -90,14 +91,25 @@ namespace Engine::Window
 			renderer->clear();
 			OnClear();
 		}
-		void display()
+		void Display()
 		{
 			renderer->display();
 		}
 #pragma endregion
 #pragma region override
 	public:
-		PrimaryType::String ToString() const override;
+		PrimaryType::String ToString() const override
+		{
+			PrimaryType::String _result = "==========Window Settings==========\n";
+			_result += PrimaryType::String("Name: ");
+			_result += name;
+			_result += "\nWidth: ";
+			_result += width.ToString();
+			_result += "\nHeight: ";
+			_result += height.ToString();
+			_result += "\n===================================\n";
+			return _result;
+		}
 #pragma endregion
 
 	};

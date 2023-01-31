@@ -152,6 +152,14 @@ Engine::PrimaryType::String Engine::PrimaryType::String::ToString() const
 {
 	return value;
 }
+void Engine::PrimaryType::String::SerializeField(std::ostream& _os, const String& _fieldName)
+{
+	if (String::IsNullOrEmpty(_fieldName))
+		_os << std::string("\"") + ToString().ToCstr() + "\"";
+	else
+		_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
+
+}
 const char* Engine::PrimaryType::String::ToCstr() const
 {
 	return value;

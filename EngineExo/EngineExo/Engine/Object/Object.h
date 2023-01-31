@@ -57,7 +57,8 @@ namespace Engine
 #pragma endregion
 #pragma region methods
 	public:
-		virtual PrimaryType::String ToString() const;
+		virtual PrimaryType::String ToString() const override;
+		PrimaryType::String ClassName() const;
 		PrimaryType::Boolean IsClass() const;
 
 		Reflection::FieldInfo* GetField(const PrimaryType::String& _name);
@@ -68,6 +69,11 @@ namespace Engine
 		void SetValue(Object* _obj);
 		template<typename T>
 		void SetFieldValue(const std::string& _name, T* _value);
+
+		virtual void Serialize(std::ostream& _os);
+		virtual void DeSerialize(std::istream& _os);
+		virtual void SerializeField(std::ostream& _os, const PrimaryType::String& _fileName);
+		virtual void DeSerializeField(std::istream& _os, const PrimaryType::String& _fileName);
 
 		template<typename Res, typename... Params>
 		Reflection::MethodInfo<Res, Params...>* GetFunction(const std::string& _name);

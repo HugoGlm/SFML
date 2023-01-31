@@ -1,5 +1,6 @@
 #pragma once
 #include "../../Utils/Singleton/Singleton.h"
+#include "../../Window/Engine/EngineWindow.h"
 
 namespace Engine
 {
@@ -18,7 +19,8 @@ namespace Engine::Manager
     public:
         void Register(GameObject* _object);
         void UnRegister(GameObject* _object);
-        void Update();
+        void Update() const;
+        void Draw(const Window::EngineWindow* _window) const;
         void OnDestroy() override;
 #pragma endregion
 
