@@ -66,6 +66,28 @@ namespace Engine::PrimaryType
 		Iterator end() { return data.end(); }
 		ConstIterator end() const { return data.end(); }
 		size_t Count() const override { return data.size(); }
+		Engine::PrimaryType::String Engine::PrimaryType::Double::ToString() const
+		{
+
+		}
+		void Engine::PrimaryType::Double::SerializeField(std::ostream& _os, const String& _fieldName)
+		{
+			_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
+		}
+		void Engine::PrimaryType::Double::DeSerializeField(std::istream& _is, const String& _fieldName)
+		{
+			std::string _line;
+			while (std::getline(_is, _line))
+			{
+				if (_line.find(std::string("\"") + _fieldName.ToCstr() + "\"") != std::string::npos)
+				{
+					String _str = _line.c_str();
+					_str = _str.SubString(0, _str.FindFirstOf(',')).Trim();
+					*this = std::stod(_str.ToCstr());
+					break;
+				}
+			}
+		}
 #pragma endregion
 #pragma region operator
 	public:

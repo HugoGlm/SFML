@@ -12,8 +12,8 @@ namespace Engine::PrimaryType
         DECLARE_CLASS_INFO(Vector2, ValueType)
 #pragma region var
     public:
-        UPROPERTY() Float x = 0.0f;
-        UPROPERTY() Float y = 0.0f;
+        Float x = 0.0f;
+        Float y = 0.0f;
 #pragma endregion
 #pragma region const
     public:
@@ -28,6 +28,7 @@ namespace Engine::PrimaryType
     public:
         String ToString() const override;
         void SerializeField(std::ostream& _os, const String& _fieldName) override;
+        void DeSerializeField(std::istream& _is, const String& _fieldName) override;
 #pragma endregion
 #pragma endregion
 #pragma region operator

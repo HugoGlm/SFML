@@ -81,18 +81,20 @@ void Engine::Object::Serialize(std::ostream& _os)
 	}
 	_os << "\n}";
 }
-void Engine::Object::DeSerialize(std::istream& _os)
+void Engine::Object::DeSerialize(std::istream& _is)
 {
 	const std::vector<Reflection::FieldInfo*> _fields = Fields();
 	const size_t _length = _fields.size();
 	for (size_t i = 0; i < _length; i++)
 	{
+		_is.clear();
+		_is.seekg(0);
 		if (_fields[i]->ReflectedObject() == nullptr)
 			continue;
 		if (_fields[i]->IsReflectedClass())
-			_fields[i]->ReflectedObject()->DeSerialize(_os);
+			_fields[i]->ReflectedObject()->DeSerialize(_is);
 		else 
-			_fields[i]->ReflectedObject()->DeSerializeField(_os, _fields[i]->Name());
+			_fields[i]->ReflectedObject()->DeSerializeField(_is, _fields[i]->Name());
 	}
 }
 void Engine::Object::SerializeField(std::ostream& _os, const PrimaryType::String& _fileName){ }

@@ -1,6 +1,7 @@
 #include "String.h"
 #include "../Boolean/Boolean.h"
 #include "../../Utils/Template/Template.h"
+#include <iostream>
 
 #pragma region constructor
 Engine::PrimaryType::String::String(const char* _value) : super()
@@ -80,13 +81,14 @@ Engine::PrimaryType::String Engine::PrimaryType::String::ToUpper() const
 }
 Engine::PrimaryType::String Engine::PrimaryType::String::SubString(size_t _begin) const
 {
-	const std::string _result = value;
-	return _result.substr(_begin).c_str();
+	return SubString(_begin, Length());
 }
 Engine::PrimaryType::String Engine::PrimaryType::String::SubString(size_t _begin, size_t _end) const
 {
-	const std::string _result = value;
-	return _result.substr(_begin, _end).c_str();
+	String _result = "";
+	for (size_t i = _begin; i < _end; ++i)
+		_result += value[i];
+	return _result;
 }
 Engine::PrimaryType::String Engine::PrimaryType::String::Replace(const String& _old, const String& _new) const
 {
@@ -139,6 +141,16 @@ void Engine::PrimaryType::String::Append(const char* _str)
 {
 	Append(String(_str));
 }
+void Engine::PrimaryType::String::Append(char _c)
+{
+	const size_t _newLegth = length + 2;
+	char* _array = new char[_newLegth];
+	strcpy(_array, value);
+	_array[length] = _c;
+	_array[length + 1] = '\0';
+	value = _array;
+	length += 1;
+}
 void Engine::PrimaryType::String::Append(const String& _str)
 {
 	const size_t _newLength = length = _str.length;
@@ -154,11 +166,22 @@ Engine::PrimaryType::String Engine::PrimaryType::String::ToString() const
 }
 void Engine::PrimaryType::String::SerializeField(std::ostream& _os, const String& _fieldName)
 {
-	if (String::IsNullOrEmpty(_fieldName))
-		_os << std::string("\"") + ToString().ToCstr() + "\"";
-	else
-		_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
-
+	_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
+}
+void Engine::PrimaryType::String::DeSerializeField(std::istream& _is, const String& _fieldName)
+{
+	std::string _line;
+	while (std::getline(_is, _line))
+	{
+		if (_line.find(std::string("\"") + _fieldName.ToCstr() + "\"") != std::string::npos)
+		{
+			String _str = _line.c_str();
+			_str = _str.SubString(_str.FindFirstOf(':'));
+			_str = _str.SubString(_str.FindFirstOf('"'), _str.FindLastOf('"')).Replace("\"", "");
+			*this = _str;
+			break;
+		}
+	}
 }
 const char* Engine::PrimaryType::String::ToCstr() const
 {
@@ -180,6 +203,11 @@ Engine::Object& Engine::PrimaryType::String::operator=(const Object* _other)
 Engine::PrimaryType::String& Engine::PrimaryType::String::operator+=(const char* _str)
 {
 	Append(_str);
+	return *this;
+}
+Engine::PrimaryType::String& Engine::PrimaryType::String::operator+=(char _c)
+{
+	Append(_c);
 	return *this;
 }
 Engine::PrimaryType::String& Engine::PrimaryType::String::operator+=(const String& _str)

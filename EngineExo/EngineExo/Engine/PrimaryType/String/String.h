@@ -40,6 +40,7 @@ REGISTER_METHOD(IsNullOrEmpty, &String::IsNullOrEmpty, (std::vector<Engine::Refl
 		int FindLastOf(char _c); //TODO replace int width Integer class
 		size_t Length() const; //TODO replace int width Integer class
 		void Append(const char* _str);
+		void Append(char _c);
 		void Append(const String& _str);
 		const char* ToCstr() const;
 #pragma endregion
@@ -47,10 +48,12 @@ REGISTER_METHOD(IsNullOrEmpty, &String::IsNullOrEmpty, (std::vector<Engine::Refl
 	public:
 		String ToString() const override;
 		void SerializeField(std::ostream& _os, const String& _fieldName) override;
+		void DeSerializeField(std::istream& _is, const String& _fieldName) override;
 #pragma endregion
 #pragma region operator
 	public:
 		String& operator+=(const char* _str);
+		String& operator+=(char _c);
 		String& operator+=(const String& _str);
 		String& operator=(const String& _other);
 		Object& operator=(const Object* _other);

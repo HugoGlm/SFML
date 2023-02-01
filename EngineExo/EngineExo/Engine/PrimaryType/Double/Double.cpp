@@ -1,6 +1,7 @@
 #include "Double.h"
 #include "../Boolean/Boolean.h"
 #include "../String/String.h"
+#include <iostream>
 
 #pragma region f/p
 const Engine::PrimaryType::Double Engine::PrimaryType::Double::Epsilon = 4.94065645841247E-324;
@@ -72,6 +73,21 @@ void Engine::PrimaryType::Double::SerializeField(std::ostream& _os, const String
 		_os << std::string("\"") + ToString().ToCstr() + "\"";
 	else
 		_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
+}
+void Engine::PrimaryType::Double::DeSerializeField(std::istream& _is, const String& _fieldName)
+{
+	std::string _line;
+	while (std::getline(_is, _line))
+	{
+		if (_line.find(std::string("\"") + _fieldName.ToCstr() + "\"") != std::string::npos)
+		{
+			String _str = _line.c_str();
+			_str = _str.SubString(_str.FindFirstOf(':'));
+			_str = _str.SubString(_str.FindFirstOf('"'), _str.FindLastOf('"')).Replace("\"", "");
+			*this = std::stod(_str.ToCstr());
+			break;
+		}
+	}
 }
 #pragma endregion
 

@@ -1,8 +1,8 @@
 "ATest" : {
-"boolean" : "false",
-"doublee" : "0.000000",
-"floatt" : "0.000000",
-"integer" : "0",
-"string" : "",
-"vector2" : "X: 0, Y: 0"
+"boolean" : "true",
+"doublee" : "120.000000",
+"floatt" : "50.000000",
+"integer" : "45",
+"string" : "gabrielle",
+"vector2" : "(10, 20)"
 }
