@@ -6,7 +6,6 @@
 #include "../Engine/PrimaryType/String/String.h"
 #include "../Engine/PrimaryType/Vector2/Vector2.h"
 #include "../Engine/PrimaryType/List/List.h"
-#include "BTest.h"
 
 namespace Test
 {
@@ -18,7 +17,5 @@ namespace Test
 REGISTER_FIELD(age, &age, BindingFlags::NoPublic)
 		UPROPERTY() Engine::PrimaryType::List<Engine::PrimaryType::String> names = { "Nounours", "Tchoupi", "Dora", "Sacha Ketchup" };
 REGISTER_FIELD(names, &names, BindingFlags::NoPublic)
-		UPROPERTY() Test::BTest b = Test::BTest();
-REGISTER_FIELD(b, &b, BindingFlags::NoPublic)
 	};
 }

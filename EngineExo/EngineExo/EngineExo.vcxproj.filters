@@ -218,9 +218,6 @@
     <ClInclude Include="Test\Reflection\Json\JsonTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Test\BTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Reflection.ps1" />

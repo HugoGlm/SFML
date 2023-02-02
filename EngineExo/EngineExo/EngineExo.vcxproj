@@ -178,7 +178,6 @@
     <ClInclude Include="Engine\Utils\Template\Pointer.h" />
     <ClInclude Include="Engine\Manager\GameObject\GameObjectManager.h" />
     <ClInclude Include="Engine\Window\Window.h" />
-    <ClInclude Include="Test\BTest.h" />
     <ClInclude Include="Test\Reflection\Json\JsonTest.h" />
     <ClInclude Include="Test\Component\PlayerComponent.h" />
     <ClInclude Include="Test\PrimaryType\ListTest\ListTest.h" />

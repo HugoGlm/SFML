@@ -6,6 +6,7 @@
 #include "../../Utils/CoreDefine.h"
 #include "../../PrimaryType/Integer/Integer.h"
 #include <vector>
+#include <iostream>
 
 namespace Engine::PrimaryType
 {
@@ -109,16 +110,42 @@ namespace Engine::PrimaryType
 		}
 		void DeSerializeField(std::istream& _is, const String& _fieldName) override
 		{
+			if constexpr(!std::is_base_of_v<Object, InElementType>)
+				throw std::exception("[List] => is an Object");
+
 			std::string _line = "";
+			std::vector<InElementType> _vector = std::vector<InElementType>();
+			bool _isList = false;
 
 			while (std::getline(_is, _line))
 			{
+				if (_line.find(std::string("]")) != std::string::npos)
+					_isList = false;
+
+				if (_isList)
+				{
+					String _res = _line.substr(_line.find_first_of('\"') + 1).c_str();
+					_res = _res.SubString(0, _res.FindFirstOf('\"'));
+					InElementType _obj = InElementType();
+					if constexpr (IsPointer<InElementType>::Value)
+					{
+						_vector.push_back(_obj);
+						_obj->DeSerializeField(_is, _res);
+					}
+					else
+					{
+						_vector.push_back(_obj);
+						_obj.DeSerializeField(_is, _res);
+					}
+					_vector.push_back(InElementType());
+				}
+
 				if (_line.find(std::string("\"") + _fieldName.ToCstr() + "\"") != std::string::npos)
 				{
-					String _str = _line.Cstr();
-
+					_isList = true;
 				}
 			}
+			data = _vector;
 		}
 #pragma endregion
 #pragma region operator
