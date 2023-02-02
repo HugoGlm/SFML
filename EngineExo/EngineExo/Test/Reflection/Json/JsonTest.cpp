@@ -1,5 +1,6 @@
 #include "JsonTest.h"
 #include "../../ATest.h"
+#include "../../BTest.h"
 #include <filesystem>
 #include <fstream>
 
@@ -11,8 +12,8 @@ void Test::JsonTest::Test()
 	a.Serialize(_outFile);
 	_outFile.close();
 
-	ATest b = ATest();
+	ATest c = ATest();
 	std::ifstream _inFile = std::ifstream(_path + "\\a.asset");
-	b.DeSerialize(_inFile);
+	c.DeSerialize(_inFile);
 	_inFile.close();
 }

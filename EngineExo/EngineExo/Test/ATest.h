@@ -5,6 +5,8 @@
 #include "../Engine/PrimaryType/Double/Double.h"
 #include "../Engine/PrimaryType/String/String.h"
 #include "../Engine/PrimaryType/Vector2/Vector2.h"
+#include "../Engine/PrimaryType/List/List.h"
+#include "BTest.h"
 
 namespace Test
 {
@@ -12,17 +14,11 @@ namespace Test
 	class ATest : public Engine::Object
 	{
 	private:
-	UPROPERTY() Engine::PrimaryType::Boolean boolean = false;
-REGISTER_FIELD(boolean, &boolean, BindingFlags::NoPublic)
-	UPROPERTY() Engine::PrimaryType::Double doublee = 0;
-REGISTER_FIELD(doublee, &doublee, BindingFlags::NoPublic)
-	UPROPERTY() Engine::PrimaryType::Float floatt = 0.0f;
-REGISTER_FIELD(floatt, &floatt, BindingFlags::NoPublic)
-	UPROPERTY() Engine::PrimaryType::Integer integer = 0;
-REGISTER_FIELD(integer, &integer, BindingFlags::NoPublic)
-	UPROPERTY() Engine::PrimaryType::String string = "";
-REGISTER_FIELD(string, &string, BindingFlags::NoPublic)
-	UPROPERTY() Engine::PrimaryType::Vector2 vector2 = Engine::PrimaryType::Vector2(0, 0);
-REGISTER_FIELD(vector2, &vector2, BindingFlags::NoPublic)
+		UPROPERTY() Engine::PrimaryType::Integer age = 10;
+REGISTER_FIELD(age, &age, BindingFlags::NoPublic)
+		UPROPERTY() Engine::PrimaryType::List<Engine::PrimaryType::String> names = { "Nounours", "Tchoupi", "Dora", "Sacha Ketchup" };
+REGISTER_FIELD(names, &names, BindingFlags::NoPublic)
+		UPROPERTY() Test::BTest b = Test::BTest();
+REGISTER_FIELD(b, &b, BindingFlags::NoPublic)
 	};
 }

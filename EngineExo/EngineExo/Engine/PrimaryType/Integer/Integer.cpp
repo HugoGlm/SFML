@@ -45,7 +45,7 @@ Engine::PrimaryType::String Engine::PrimaryType::Integer::ToString() const
 {
 	return std::to_string(value).c_str();
 }
-void Engine::PrimaryType::Integer::SerializeField(std::ostream& _os, const String& _fieldName)
+void Engine::PrimaryType::Integer::SerializeField(std::ostream& _os, const String& _fieldName, int _index)
 {
 	if (String::IsNullOrEmpty(_fieldName))
 		_os << std::string("\"") + ToString().ToCstr() + "\"";

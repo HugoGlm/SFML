@@ -2,7 +2,7 @@
 #include "IList.h"
 #include "../ValueType/ValueType.h"
 #include "../../Utils/DebugMacro.h"
-#include "../../Utils/Template/Pointer.h"
+#include "../../Utils/Template/Template.h"
 #include "../../Utils/CoreDefine.h"
 #include "../../PrimaryType/Integer/Integer.h"
 #include <vector>
@@ -66,25 +66,57 @@ namespace Engine::PrimaryType
 		Iterator end() { return data.end(); }
 		ConstIterator end() const { return data.end(); }
 		size_t Count() const override { return data.size(); }
-		Engine::PrimaryType::String Engine::PrimaryType::Double::ToString() const
+#pragma endregion
+#pragma region override
+	public:
+		void SerializeField(std::ostream& _os, const PrimaryType::String& _fieldName, int _index) override
 		{
+			if (String::IsNullOrEmpty(_fieldName))
+				_os << "[\n";
+			else
+				_os << "\"" + std::string(_fieldName.ToCstr()) + "\" : ";
 
+			if constexpr (IsPointer<InElementType>::Value)
+				_os << "\"" << data[0]->ClassName().ToCstr() << "\"";
+			else
+				_os << "\"" << data[0].ClassName().ToCstr() << "\"";
+
+			_os << " [\n";
+
+			const size_t _size = data.size();
+			for (size_t i = 0; i < _size; i++)
+			{
+				_os << std::string(_index, '\t') << "\t\t";
+				if constexpr (IsPointer<InElementType>::Value)
+				{
+					if (data[i]->IsClass())
+						data[i]->Serialize(_os);
+					else
+						data[i]->SerializeField(_os, "", _index);
+				}
+				else
+				{
+					if (data[i].IsClass())
+						data[i].Serialize(_os);
+					else
+						data[i].SerializeField(_os, "", _index);
+				}
+				if (i < _size - 1)
+					_os << ",";
+				_os << "\n";
+			}
+			_os << std::string(_index, '\t') << "]";
 		}
-		void Engine::PrimaryType::Double::SerializeField(std::ostream& _os, const String& _fieldName)
+		void DeSerializeField(std::istream& _is, const String& _fieldName) override
 		{
-			_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
-		}
-		void Engine::PrimaryType::Double::DeSerializeField(std::istream& _is, const String& _fieldName)
-		{
-			std::string _line;
+			std::string _line = "";
+
 			while (std::getline(_is, _line))
 			{
 				if (_line.find(std::string("\"") + _fieldName.ToCstr() + "\"") != std::string::npos)
 				{
-					String _str = _line.c_str();
-					_str = _str.SubString(0, _str.FindFirstOf(',')).Trim();
-					*this = std::stod(_str.ToCstr());
-					break;
+					String _str = _line.Cstr();
+
 				}
 			}
 		}

@@ -27,9 +27,12 @@ Engine::PrimaryType::String Engine::PrimaryType::Vector2::ToString() const
 {
 	return std::format("({}, {})", x, y).c_str();
 }
-void Engine::PrimaryType::Vector2::SerializeField(std::ostream& _os, const String& _fieldName)
+void Engine::PrimaryType::Vector2::SerializeField(std::ostream& _os, const String& _fieldName, int _index)
 {
-	_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
+	if (String::IsNullOrEmpty(_fieldName))
+		_os << "\"" << ToString().ToCstr() << "\"";
+	else
+		_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
 }
 void Engine::PrimaryType::Vector2::DeSerializeField(std::istream& _is, const String& _fieldName)
 {
