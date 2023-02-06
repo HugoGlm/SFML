@@ -9,7 +9,7 @@ namespace Engine::Event
 		DECLARE_CLASS_INFO(ActionInternal, Object)
 #pragma region f/p
 	private:
-		std::vector<Deleagte<Res, Params...>> delegates = std::vector<Deleagte<Res, Params...>>();
+		std::vector<Delegate<Res, Params...>> delegates = std::vector<Delegate<Res, Params...>>();
 #pragma endregion
 #pragma region constructor
 	public:
@@ -18,7 +18,7 @@ namespace Engine::Event
 			delegates.clear();
 		}
 		template<typename Class>
-		ActionInternal(Class* _instance, Res(Class::* ptr)(Params...)
+		ActionInternal(Class* _instance, Res(Class::* ptr)(Params...))
 		{
 			checkBaseOf(Object, Class)
 				delegates.push_back(Delegate<Res, Params...>(_instance, ptr));
@@ -29,14 +29,14 @@ namespace Engine::Event
 		template<typename Class>
 		void AddDynamic(Class* _instance, Res(Class::* ptr)(Params...))
 		{
-			checkBaseOf(object, Class)
+			checkBaseOf(Object, Class)
 				delegates.push_back(delegate<Res, Params...>(_instance, ptr));
 		}
 		template<typename Class>
 		void RemoveDynamic(Class* _instance, Res(Class::* ptr)(Params...))
 		{
 			checkBaseOf(Object, Class)
-				std::vector<delegate<Res, Params...>>::iterator it = delegates.begin();
+			typename std::vector<delegate<Res, Params...>>::iterator it = delegates.begin();
 			for (; it != delegates.end(); it++)
 			{
 				if (*it.GetAdress() == (void*&)ptr && *it.Instance() == _instance)
@@ -65,12 +65,12 @@ namespace Engine::Event
 #pragma endregion
 #pragma region operator
 	public:
-		ActionInternal& operator=(nullptr)
+		ActionInternal& operator=(nullptr_t)
 		{
 			delegates.clear();
 			return *this;
 		}
-		ActionInternal& operator=(const Action& _other)
+		ActionInternal& operator=(const ActionInternal& _other)
 		{
 			delegates = _other.delegates;
 			return *this;

@@ -36,8 +36,8 @@ REGISTER_METHOD(IsNullOrEmpty, &String::IsNullOrEmpty, (std::vector<Engine::Refl
 		String Replace(const String& _old, const String& _new) const;
 		String Replace(char _old, char _new);
 		String Trim() const;
-		int FindFirstOf(char _c); //TODO replace int width Integer class
-		int FindLastOf(char _c); //TODO replace int width Integer class
+		int FindFirstOf(char _c) const; //TODO replace int width Integer class
+		int FindLastOf(char _c) const; //TODO replace int width Integer class
 		size_t Length() const; //TODO replace int width Integer class
 		void Append(const char* _str);
 		void Append(char _c);

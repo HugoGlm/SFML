@@ -1,9 +1,10 @@
 "ATest" : {
-	"age" : "10",
-	"names" : "String" [
-			"Nounours",
-			"Tchoupi",
-			"Dora",
-			"Sacha Ketchup"
+	"integers" : "Integer" [
+			"0",
+			"1",
+			"2",
+			"3",
+			"4",
+			"5"
 	]
 }

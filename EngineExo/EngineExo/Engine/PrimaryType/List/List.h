@@ -5,6 +5,7 @@
 #include "../../Utils/Template/Template.h"
 #include "../../Utils/CoreDefine.h"
 #include "../../PrimaryType/Integer/Integer.h"
+#include "../../Utils/Template/Pointer.h"
 #include <vector>
 #include <iostream>
 
@@ -110,46 +111,68 @@ namespace Engine::PrimaryType
 		}
 		void DeSerializeField(std::istream& _is, const String& _fieldName) override
 		{
-			if constexpr(!std::is_base_of_v<Object, InElementType>)
-				throw std::exception("[List] => is an Object");
-
 			std::string _line = "";
-			std::vector<InElementType> _vector = std::vector<InElementType>();
-			bool _isList = false;
+			bool _isStarted = false;
+			std::vector<InElementType> _result = std::vector<InElementType>();
+			size_t _index = 0;
+			typedef typename RemovePointer<InElementType>::Type TypeNoPointer;
+
+			TypeNoPointer _element = TypeNoPointer();
 
 			while (std::getline(_is, _line))
 			{
-				if (_line.find(std::string("]")) != std::string::npos)
-					_isList = false;
-
-				if (_isList)
+				if (_line.find(std::string("\"") + _fieldName.ToCstr() + "\"") != std::string::npos)
 				{
-					String _res = _line.substr(_line.find_first_of('\"') + 1).c_str();
-					_res = _res.SubString(0, _res.FindFirstOf('\"'));
-					InElementType _obj = InElementType();
+					_isStarted = true;
+					_index = _is.tellg(); 
+					++_index;
+				}
+				if (_line.find("},") != std::string::npos)
+					break;
+				if (_isStarted)
+				{
+					//TODO isClass
+					if (_element.IsClass())
+					{
+						if (_line.find('}') != std::string::npos && _line.find(',') == std::string::npos)
+							break;
+					}
+					else if (_line.find(']') != std::string::npos)
+						break;
+
+					_is.clear();
+					_is.seekg(_index);
 					if constexpr (IsPointer<InElementType>::Value)
 					{
-						_vector.push_back(_obj);
-						_obj->DeSerializeField(_is, _res);
+						InElementType _element = new typename RemovePointer<InElementType>::Type();
+						if (_element->IsClass())
+							_element->DeSerialize(_is);
+						else
+							_element->DeSerializeField(_is, "");
+						_result.push_back(_element);
 					}
 					else
 					{
-						_vector.push_back(_obj);
-						_obj.DeSerializeField(_is, _res);
+						InElementType _element = InElementType();
+						if (_element.IsClass())
+							_element.DeSerialize(_is);
+						else
+							_element.DeSerializeField(_is, "");
+						_result.push_back(_element);
 					}
-					_vector.push_back(InElementType());
-				}
-
-				if (_line.find(std::string("\"") + _fieldName.ToCstr() + "\"") != std::string::npos)
-				{
-					_isList = true;
+					_index = _is.tellg();
 				}
 			}
-			data = _vector;
+			*this = _result;
 		}
 #pragma endregion
 #pragma region operator
 	public:
+		List& operator=(const std::vector<InElementType>& _other)
+		{
+			data = _other;
+			return *this;
+		}
 		InElementType& operator[](size_t _index)
 		{
 			return data[_index];

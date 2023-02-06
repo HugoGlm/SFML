@@ -20,25 +20,13 @@ Engine::PrimaryType::String Engine::PrimaryType::Boolean::ToString() const
 }
 void Engine::PrimaryType::Boolean::SerializeField(std::ostream& _os, const String& _fieldName, int _index)
 {
-	if (String::IsNullOrEmpty(_fieldName))
-		_os << std::string("\"") + ToString().ToCstr() + "\"";
-	else
-		_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
+	Reflection::ReflectionUtils::SerializePrimaryType(_os, this, _fieldName);
 }
 void Engine::PrimaryType::Boolean::DeSerializeField(std::istream& _is, const String& _fieldName)
 {
-	std::string _line;
-	while (std::getline(_is, _line))
-	{
-		if (_line.find(std::string("\"") + _fieldName.ToCstr() + "\"") != std::string::npos)
-		{
-			String _str = _line.c_str();
-			_str = _str.SubString(_str.FindFirstOf(':'));
-			_str = _str.SubString(_str.FindFirstOf('"'), _str.FindLastOf('"')).Replace("\"", "");
-			*this = _str == "true";
-			break;
-		}
-	}
+	String _str = Reflection::ReflectionUtils::GetLine(_is, _fieldName);
+	_str = _str.Replace("\"", "").Replace("\t", "").Replace(",", "").Replace(_fieldName, "").Replace(":", "").Trim();
+	*this = _str == "true";
 }
 #pragma endregion
 

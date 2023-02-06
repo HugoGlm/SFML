@@ -4,6 +4,7 @@
 #include "../Reflection/Function/Method/MethodInfo.h"
 #include "../Reflection/Function/ParameterInfo/ParameterInfo.h"
 #include "../Utils/Interface/Log/ILogger.h"
+#include "../Utils/ObjectMacro.h"
 #include <format>
 
 #pragma warning(disable: 4996)

@@ -1,5 +1,5 @@
 #include "JsonTest.h"
-#include "../../ATest.h"
+#include "ATest.h"
 #include <filesystem>
 #include <fstream>
 

@@ -38,7 +38,7 @@ Engine::PrimaryType::Boolean Engine::PrimaryType::String::EndWith(char _c) const
 }
 Engine::PrimaryType::Boolean Engine::PrimaryType::String::StartWith(const String& _str) const
 {
-	for (size_t i = 0; i < length; i++)
+	for (size_t i = 0; i < _str.length; i++)
 		if (value[i] != _str.value[i])
 			return false;
 	return true;
@@ -92,6 +92,8 @@ Engine::PrimaryType::String Engine::PrimaryType::String::SubString(size_t _begin
 }
 Engine::PrimaryType::String Engine::PrimaryType::String::Replace(const String& _old, const String& _new) const
 {
+	if (IsNullOrEmpty(_old))
+		return value;
 	std::string _str = value;
 	size_t _startPos = 0;
 	const std::string& _from = _old.value;
@@ -118,14 +120,14 @@ Engine::PrimaryType::String Engine::PrimaryType::String::Trim() const
 {
 	return Replace(" ", "");;
 }
-int Engine::PrimaryType::String::FindFirstOf(char _c)
+int Engine::PrimaryType::String::FindFirstOf(char _c) const
 {
 	for (int i = 0; i < length; i++)
 		if (value[i] == _c)
 			return i;
 	return -1;
 }
-int Engine::PrimaryType::String::FindLastOf(char _c)
+int Engine::PrimaryType::String::FindLastOf(char _c) const
 {
 	int _result = -1;
 	for (int i = 0; i < length; i++)
@@ -166,25 +168,13 @@ Engine::PrimaryType::String Engine::PrimaryType::String::ToString() const
 }
 void Engine::PrimaryType::String::SerializeField(std::ostream& _os, const String& _fieldName, int _index)
 {
-	if (IsNullOrEmpty(_fieldName))
-		_os << "\"" << ToString().ToCstr() << "\"";
-	else
-		_os << std::string("\"") + _fieldName.ToString().ToCstr() + "\" : \"" + ToString().ToCstr() + "\"";
+	Reflection::ReflectionUtils::SerializePrimaryType(_os, this, _fieldName);
 }
 void Engine::PrimaryType::String::DeSerializeField(std::istream& _is, const String& _fieldName)
 {
-	std::string _line;
-	while (std::getline(_is, _line))
-	{
-		if (_line.find(std::string("\"") + _fieldName.ToCstr() + "\"") != std::string::npos)
-		{
-			String _str = _line.c_str();
-			_str = _str.SubString(_str.FindFirstOf(':'));
-			_str = _str.SubString(_str.FindFirstOf('"'), _str.FindLastOf('"')).Replace("\"", "");
-			*this = _str;
-			break;
-		}
-	}
+	String _str = Reflection::ReflectionUtils::GetLine(_is, _fieldName);
+	_str = _str.Replace("\"", "").Replace("\t", "").Replace(",", "").Replace(_fieldName, "").Replace(":", "").Trim();
+	*this = _str;
 }
 const char* Engine::PrimaryType::String::ToCstr() const
 {

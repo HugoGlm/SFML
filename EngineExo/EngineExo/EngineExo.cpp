@@ -3,15 +3,21 @@
 #include "Engine/Window/Engine/EngineWindow.h"
 #include "Engine/GameObject/GameObject.h"
 #include "Engine/Manager/GameObject/GameObjectManager.h"
+#include "Engine/AssetDataBase/AssetDataBase.h"
 #include "Test/Component/PlayerComponent.h"
 #include "Test/Reflection/Json/JsonTest.h"
 
 int main()
 {
 	Test::JsonTest::Test();
-	/*Engine::GameObject* object = Engine::GameObject::CreatePrimitive(PrimitiveType::Circle, "circle");
-	object->SetColor(sf::Color::Red);
-	object->AddComponent<Test::PlayerComponent>();
+
+
+
+	/*Engine::GameObject* _gameObject = Engine::GameObject::CreatePrimitive(PrimitiveType::Circle, "Test");
+	_gameObject->AddComponent<Test::PlayerComponent>();
+
+	Engine::AssetDataBase::CreateAsset(_gameObject, "../Asset/GameObjectTest.asset");
+
 	Engine::Window::EngineWindow::Instance()->Open();
 	Engine::Manager::GameObjectManager::Instance()->Destroy();*/
 }

@@ -11,9 +11,9 @@ namespace Engine::Event
 		DECLARE_CLASS_INFO(Delegate, Object)
 #pragma region f/p
 	private:
-		typedef Res(object::* Function)(Params...);
+		typedef Res(Object::* Function)(Params...);
 		Function function = nullptr;
-		Object* instance = nullptr
+		Object* instance = nullptr;
 #pragma endregion
 #pragma region constructor
 	public:
@@ -23,7 +23,7 @@ namespace Engine::Event
 			instance = nullptr;
 		}
 		template<typename Class>
-		Delegate(Class* _instance, Res(Class::* ptr)(params...))
+		Delegate(Class* _instance, Res(Class::* ptr)(Params...))
 		{
 			checkBaseOf(Object, Class)
 				instance = _instance;
@@ -38,7 +38,7 @@ namespace Engine::Event
 			instance = nullptr;
 		}
 		template<typename Class>
-		void SetDynamic(Class* _instance, Res(Class::* ptr)(params...))
+		void SetDynamic(Class* _instance, Res(Class::* ptr)(Params...))
 		{
 			checkBaseOf(Object, Class)
 			instance = _instance;
@@ -46,7 +46,7 @@ namespace Engine::Event
 		}
 		Res Invoke(Params... _params)
 		{
-			return (instance->*function)(_params);
+			return (instance->*function)(_params...);
 		}
 		PrimaryType::Boolean IsValid() const
 		{
@@ -65,10 +65,10 @@ namespace Engine::Event
 	public:
 		PrimaryType::Boolean operator==(const Delegate& _other)
 		{
-			return GetAdrress() == _other.GetAddress();
+			return GetAddress() == _other.GetAddress();
 		}
 		template<typename Class>
-		PrimaryType::Boolean operator==(res(Class::* ptr)(Params...))
+		PrimaryType::Boolean operator==(Res(Class::* ptr)(Params...))
 		{
 			return GetAddress() == (void*&)ptr;
 		}
@@ -78,7 +78,7 @@ namespace Engine::Event
 			instance = nullptr;
 			return *this;
 		}
-		res operator()(Params... _params)
+		Res operator()(Params... _params)
 		{
 			return (instance->*function)(_params...);
 		}

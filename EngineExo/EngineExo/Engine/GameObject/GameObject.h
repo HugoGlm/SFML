@@ -20,12 +20,16 @@ namespace Engine
 		DECLARE_CLASS_INFO(GameObject, Object)
 #pragma region f/p
 	private: 
-		PrimaryType::List<Component*> components = PrimaryType::List<Engine::Component*>();
+		UPROPERTY() PrimaryType::List<Component*> components = PrimaryType::List<Engine::Component*>();
+REGISTER_FIELD(components, &components, BindingFlags::NoPublic)
 	protected:
-		sf::Shape* shape = nullptr;
+		UPROPERTY() sf::Shape* shape = nullptr;
+REGISTER_FIELD(shape, shape, BindingFlags::NoPublic)
 	public:
-		PrimaryType::String name = "";
-		Transform* transform = nullptr;
+		UPROPERTY() PrimaryType::String name = "";
+REGISTER_FIELD(name, &name, BindingFlags::Public)
+		UPROPERTY() Transform* transform = nullptr;
+REGISTER_FIELD(transform, transform, BindingFlags::Public)
 #pragma endregion
 #pragma region constructor
 	public:

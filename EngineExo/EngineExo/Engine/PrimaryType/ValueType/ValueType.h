@@ -1,5 +1,6 @@
 #pragma once
 #include "../../Object/Object.h"
+#include "../../Reflection/Utils/ReflectionUtils.h"
 
 namespace Engine::PrimaryType
 {

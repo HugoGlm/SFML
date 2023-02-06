@@ -141,9 +141,12 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\AssetDataBase\AssetDataBase.cpp" />
+    <ClCompile Include="Engine\Reflection\Utils\ReflectionUtils.cpp" />
     <ClCompile Include="Engine\Window\Engine\EngineWindow.cpp" />
     <ClCompile Include="Engine\Component\Component.cpp" />
     <ClCompile Include="Engine\Manager\GameObject\GameObjectManager.cpp" />
+    <ClCompile Include="Engine\Selection\Selection.cpp" />
     <ClCompile Include="Test\Reflection\Json\JsonTest.cpp" />
     <ClCompile Include="Test\Component\PlayerComponent.cpp" />
     <ClCompile Include="Test\PrimaryType\ListTest\ListTest.cpp" />
@@ -169,6 +172,9 @@
     <ClCompile Include="Engine\PrimaryType\Vector2\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\AssetDataBase\AssetDataBase.h" />
+    <ClInclude Include="Engine\Reflection\Utils\ReflectionUtils.h" />
+    <ClInclude Include="Engine\Utils\ObjectMacro.h" />
     <ClInclude Include="Engine\Window\Engine\EngineWindow.h" />
     <ClInclude Include="Engine\Component\Component.h" />
     <ClInclude Include="Engine\PrimaryType\List\IList.h" />
@@ -178,10 +184,12 @@
     <ClInclude Include="Engine\Utils\Template\Pointer.h" />
     <ClInclude Include="Engine\Manager\GameObject\GameObjectManager.h" />
     <ClInclude Include="Engine\Window\Window.h" />
+    <ClInclude Include="Engine\Selection\Selection.h" />
+    <ClInclude Include="Assembly.h" />
+    <ClInclude Include="Test\Reflection\Json\ATest.h" />
     <ClInclude Include="Test\Reflection\Json\JsonTest.h" />
     <ClInclude Include="Test\Component\PlayerComponent.h" />
     <ClInclude Include="Test\PrimaryType\ListTest\ListTest.h" />
-    <ClInclude Include="Test\ATest.h" />
     <ClInclude Include="Engine\Event\Action\Action.h" />
     <ClInclude Include="Engine\Event\Delegate\Delegate.h" />
     <ClInclude Include="Engine\Reflection\Flags\BindingFlags.h" />
@@ -213,6 +221,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\a.asset" />
+    <None Include="..\Asset\GameObjectTest.asset">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </None>
+    <None Include="Assembly.ps1" />
     <None Include="Reflection.ps1" />
     <None Include="ReflectionFunction.ps1" />
     <None Include="ReflectionProperty.ps1" />
