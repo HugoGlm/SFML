@@ -4,7 +4,7 @@
 
 namespace Engine
 {
-	UCLASS();
+	UCLASS()
 	class Transform : public Component
 	{
 		DECLARE_CLASS_INFO(Transform, Component)

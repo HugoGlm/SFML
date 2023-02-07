@@ -3,6 +3,7 @@
 
 namespace Engine::PrimaryType
 {
+	UCLASS()
 	class Integer : public ValueType
 	{
 		DECLARE_CLASS_INFO(Integer, ValueType)

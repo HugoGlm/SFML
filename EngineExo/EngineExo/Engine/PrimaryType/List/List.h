@@ -131,7 +131,6 @@ namespace Engine::PrimaryType
 					break;
 				if (_isStarted)
 				{
-					//TODO isClass
 					if (_element.IsClass())
 					{
 						if (_line.find('}') != std::string::npos && _line.find(',') == std::string::npos)

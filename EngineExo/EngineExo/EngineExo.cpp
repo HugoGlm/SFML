@@ -4,15 +4,14 @@
 #include "Engine/GameObject/GameObject.h"
 #include "Engine/Manager/GameObject/GameObjectManager.h"
 #include "Engine/AssetDataBase/AssetDataBase.h"
+#include "Engine/Utils/Interface/Log/ILogger.h"
 #include "Test/Component/PlayerComponent.h"
 #include "Test/Reflection/Json/JsonTest.h"
 
 int main()
 {
 	Test::JsonTest::Test();
-
-
-
+	
 	/*Engine::GameObject* _gameObject = Engine::GameObject::CreatePrimitive(PrimitiveType::Circle, "Test");
 	_gameObject->AddComponent<Test::PlayerComponent>();
 

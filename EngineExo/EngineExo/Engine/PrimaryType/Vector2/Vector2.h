@@ -6,7 +6,7 @@
 namespace Engine::PrimaryType
 {
     class Boolean;
-
+    UCLASS()
     class Vector2 : public ValueType
     {
         DECLARE_CLASS_INFO(Vector2, ValueType)
