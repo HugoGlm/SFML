@@ -17,6 +17,13 @@
 #define REGISTER_FIELD(name, field, flags) const size_t Field##name = InsertField(#name, (Object*)field, flags);
 #define REGISTER_METHOD(name, method, params, flags) const size_t Method##name = InsertMethod(#name, method, params, flags);
 
+#define DECLARE_COPY(Class) \
+    public:\
+        Object* Clone() override \
+        {\
+            return new Class(*this);\
+        }
+
 #define DECLARE_CLASS_INFO_FLAGS(current, parent, flags)\
 	public:\
 		typedef current self;\
@@ -58,6 +65,7 @@ namespace Engine
 #pragma endregion
 #pragma region methods
 	public:
+		virtual Object* Clone();
 		virtual PrimaryType::String ToString() const override;
 		PrimaryType::String ClassName() const;
 		PrimaryType::Boolean IsClass() const;

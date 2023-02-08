@@ -14,6 +14,10 @@ Engine::Object::Object(const Object& _copy)
 #pragma endregion
 
 #pragma region methods
+Engine::Object* Engine::Object::Clone()
+{
+	return new Object(*this);
+}
 Engine::PrimaryType::String Engine::Object::ToString() const
 {
 	return ClassName();
