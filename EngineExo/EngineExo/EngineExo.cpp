@@ -10,7 +10,9 @@
 
 int main()
 {
-	Test::JsonTest::Test();
+
+
+	//Test::JsonTest::Test();
 	
 	/*Engine::GameObject* _gameObject = Engine::GameObject::CreatePrimitive(PrimitiveType::Circle, "Test");
 	_gameObject->AddComponent<Test::PlayerComponent>();

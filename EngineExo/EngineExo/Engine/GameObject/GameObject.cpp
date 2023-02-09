@@ -65,6 +65,11 @@ void Engine::GameObject::Draw(const Window::EngineWindow* _window) const
 	shape->setPosition(transform->position);
 	_window->Draw(shape);
 }
+void Engine::GameObject::OnDesrializeFinish()
+{
+	for (Component*& _component : components)
+		_component->gameobject = this;
+}
 #pragma endregion
 
 #pragma region operator
@@ -81,11 +86,6 @@ Engine::PrimaryType::Boolean Engine::GameObject::operator==(const GameObject& _o
 Engine::PrimaryType::Boolean Engine::GameObject::operator!=(const GameObject& _other) const
 {
 	return !this->operator==(_other);
-}
-void Engine::GameObject::OnDesrializeFinish()
-{
-	for (Component*& _component : components)
-		_component->gameobject = this;
 }
 #pragma endregion
 

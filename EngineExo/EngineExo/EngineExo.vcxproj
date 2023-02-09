@@ -141,6 +141,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\UI\Button\Button.cpp" />
     <ClCompile Include="Engine\AssetDataBase\AssetDataBase.cpp" />
     <ClCompile Include="Engine\PrimaryType\ValueType\ValueType.cpp" />
     <ClCompile Include="Engine\Reflection\Utils\ReflectionUtils.cpp" />
@@ -148,6 +149,9 @@
     <ClCompile Include="Engine\Component\Component.cpp" />
     <ClCompile Include="Engine\Manager\GameObject\GameObjectManager.cpp" />
     <ClCompile Include="Engine\Selection\Selection.cpp" />
+    <ClCompile Include="Engine\UI\Manager\UIElementManager.cpp" />
+    <ClCompile Include="Engine\UI\Label\Label.cpp" />
+    <ClCompile Include="Engine\UI\Image\Image.cpp" />
     <ClCompile Include="Test\Reflection\Json\JsonTest.cpp" />
     <ClCompile Include="Test\Component\PlayerComponent.cpp" />
     <ClCompile Include="Test\PrimaryType\ListTest\ListTest.cpp" />
@@ -170,8 +174,10 @@
     <ClCompile Include="Test\PrimaryType\Integer\IntegerTest.cpp" />
     <ClCompile Include="Engine\Transform\Transform.cpp" />
     <ClCompile Include="Engine\PrimaryType\Vector2\Vector2.cpp" />
+    <ClCompile Include="Engine\UI\UIElement.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\UI\Button\Button.h" />
     <ClInclude Include="Engine\AssetDataBase\AssetDataBase.h" />
     <ClInclude Include="Engine\Reflection\Utils\ReflectionUtils.h" />
     <ClInclude Include="Engine\Utils\ObjectMacro.h" />
@@ -186,6 +192,9 @@
     <ClInclude Include="Engine\Window\Window.h" />
     <ClInclude Include="Engine\Selection\Selection.h" />
     <ClInclude Include="Assembly.h" />
+    <ClInclude Include="Engine\UI\Manager\UIElementManager.h" />
+    <ClInclude Include="Engine\UI\Label\Label.h" />
+    <ClInclude Include="Engine\UI\Image\Image.h" />
     <ClInclude Include="Test\Reflection\Json\ATest.h" />
     <ClInclude Include="Test\Reflection\Json\JsonTest.h" />
     <ClInclude Include="Test\Component\PlayerComponent.h" />
@@ -218,6 +227,7 @@
     <ClInclude Include="Engine\Transform\Transform.h" />
     <ClInclude Include="Engine\PrimaryType\Vector2\Vector2.h" />
     <ClInclude Include="Engine\Time\Time.h" />
+    <ClInclude Include="Engine\UI\UIElement.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\a.asset" />

@@ -3,8 +3,10 @@
 #include "../../Time/Time.h"
 
 #pragma region constructor
-Engine::Window::EngineWindow::EngineWindow() : super("Engine", 1920, 1080) { }
+Engine::Window::EngineWindow::EngineWindow() : super("Engine", 1920, 1080) 
+{
 
+}
 Engine::Window::EngineWindow::EngineWindow(const EngineWindow& _copy)
 	: super(_copy.name, _copy.width, _copy.height) { }
 #pragma endregion
