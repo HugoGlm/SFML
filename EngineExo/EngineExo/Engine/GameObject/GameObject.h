@@ -28,14 +28,12 @@ REGISTER_FIELD(shape, shape, BindingFlags::NoPublic)
 	public:
 		UPROPERTY() PrimaryType::String name = "";
 REGISTER_FIELD(name, &name, BindingFlags::Public)
-		UPROPERTY() Transform* transform = nullptr;
-REGISTER_FIELD(transform, transform, BindingFlags::Public)
+		Transform* transform = nullptr;
 #pragma endregion
 #pragma region constructor
 	public:
 		GameObject() = default;
 		GameObject(const PrimaryType::String& _name);
-		GameObject(const GameObject& _copy);
 		~GameObject() override;
 #pragma endregion
 #pragma region methods
@@ -57,6 +55,7 @@ REGISTER_FIELD(transform, transform, BindingFlags::Public)
 		PrimaryType::Boolean operator==(const GameObject& _other) const;
 		PrimaryType::Boolean operator!=(const GameObject& _other) const;
 #pragma endregion
+		virtual void OnDesrializeFinish() override;
 
 	};
 	template<typename T>

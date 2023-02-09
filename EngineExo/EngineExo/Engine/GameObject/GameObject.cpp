@@ -82,5 +82,10 @@ Engine::PrimaryType::Boolean Engine::GameObject::operator!=(const GameObject& _o
 {
 	return !this->operator==(_other);
 }
+void Engine::GameObject::OnDesrializeFinish()
+{
+	for (Component*& _component : components)
+		_component->gameobject = this;
+}
 #pragma endregion
 

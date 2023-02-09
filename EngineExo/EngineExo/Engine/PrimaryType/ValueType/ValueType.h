@@ -10,7 +10,6 @@ namespace Engine::PrimaryType
 #pragma region constructor
 	public:
 		ValueType() = default;
-		ValueType(const ValueType&) = default;
 		~ValueType() override = default;
 #pragma endregion
 #pragma region operator
@@ -23,4 +22,5 @@ namespace Engine::PrimaryType
 
 	};
 }
+
 

@@ -3,11 +3,16 @@
 #include "../String/String.h"
 #include "../../Reflection/Utils/ReflectionUtils.h"
 
-#pragma region const
+#pragma region constructor
 Engine::PrimaryType::Vector2::Vector2(float _x, float _y)
 {
 	x = _x;
 	y = _y;
+}
+Engine::PrimaryType::Vector2::Vector2(const Vector2& _copy)
+{
+	x = _copy.x;
+	y = _copy.y;
 }
 #pragma endregion
 

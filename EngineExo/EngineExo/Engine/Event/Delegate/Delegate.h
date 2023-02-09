@@ -86,3 +86,10 @@ namespace Engine::Event
 
 	};
 }
+
+template<typename Res, typename... Params>
+Engine::Event::Delegate<Res, Params...>::Delegate(const Delegate& _copy)
+{
+	function = _copy.function;
+	instance = _copy.instance;
+}

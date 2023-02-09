@@ -21,7 +21,6 @@ namespace Engine::PrimaryType
 	public:
 		Float() = default;
 		Float(float _value);
-		Float(const Float& _copy);
 #pragma endregion
 #pragma region methods
 		static Float Parse(const String& _str);

@@ -18,7 +18,6 @@ namespace Engine::PrimaryType
 #pragma region const
     public:
         Vector2() = default;
-        Vector2(const Vector2&) = default;
         Vector2(float _x, float _y);
 #pragma region methods
     public:

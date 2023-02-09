@@ -114,7 +114,7 @@ namespace Engine::PrimaryType
 			std::string _line = "";
 			bool _isStarted = false;
 			std::vector<InElementType> _result = std::vector<InElementType>();
-			size_t _index = 0;
+			size_t _index = -1;
 			typedef typename RemovePointer<InElementType>::Type TypeNoPointer;
 
 			TypeNoPointer _element = TypeNoPointer();
@@ -124,40 +124,29 @@ namespace Engine::PrimaryType
 				if (_line.find(std::string("\"") + _fieldName.ToCstr() + "\"") != std::string::npos)
 				{
 					_isStarted = true;
-					_index = _is.tellg(); 
-					++_index;
 				}
-				if (_line.find("},") != std::string::npos)
+				else if (_line.find("],") != std::string::npos)
 					break;
-				if (_isStarted)
+				else if (_isStarted && _line.find('}') == std::string::npos)
 				{
-					if (_element.IsClass())
-					{
-						if (_line.find('}') != std::string::npos && _line.find(',') == std::string::npos)
-							break;
-					}
-					else if (_line.find(']') != std::string::npos)
-						break;
-
-					_is.clear();
-					_is.seekg(_index);
+					if (_index != -1)
+						_is.seekg(_index);
+					String _className = _line.c_str();
+					_className = _className.SubString(_className.FindFirstOf('\"'), _className.FindFirstOf(':'));
+					_className = _className.Replace("\"", "").Trim();
+					Object* _classType = TypeOfData::Types[_className.ToCstr()];
+					Object* _data = _className ? _classType->Clone() : new TypeNoPointer();
+					if (_data->IsClass())
+						_data->DeSerialize(_is);
+					else _data->DeSerializeField(_is, "");
 					if constexpr (IsPointer<InElementType>::Value)
 					{
-						InElementType _element = new typename RemovePointer<InElementType>::Type();
-						if (_element->IsClass())
-							_element->DeSerialize(_is);
-						else
-							_element->DeSerializeField(_is, "");
-						_result.push_back(_element);
+						_result.push_back(dynamic_cast<InElementType>(_data));
 					}
 					else
 					{
-						InElementType _element = InElementType();
-						if (_element.IsClass())
-							_element.DeSerialize(_is);
-						else
-							_element.DeSerializeField(_is, "");
-						_result.push_back(_element);
+						_result.push_back(*dynamic_cast<InElementType*>(_data));
+
 					}
 					_index = _is.tellg();
 				}

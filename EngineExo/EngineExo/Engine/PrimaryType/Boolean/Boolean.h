@@ -15,7 +15,6 @@ namespace Engine::PrimaryType
 	public:
 		Boolean() = default;
 		Boolean(bool _value);
-		Boolean(const Boolean& _copy);
 #pragma endregion
 #pragma region override
 	public:

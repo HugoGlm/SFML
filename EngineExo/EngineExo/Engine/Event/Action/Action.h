@@ -90,3 +90,9 @@ template<typename T, typename... Params>
 using Func = Engine::Event::ActionInternal<T, Params...>;
 template<typename... Params>
 using Predicate = Engine::Event::ActionInternal<bool, Params...>;
+
+template<typename T, typename... Params>
+Engine::Event::ActionInternal<T, Params...>::ActionInternal(const ActionInternal& _copy)
+{
+	delegates = _copy.delegates;
+}

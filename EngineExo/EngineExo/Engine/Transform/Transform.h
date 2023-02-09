@@ -15,11 +15,12 @@ REGISTER_FIELD(position, &position, BindingFlags::Public)
 #pragma endregion
 #pragma region constructor
 	public:
-
+		Transform() = default;
 #pragma endregion
-#pragma region methods
+#pragma region operator
 		public:
-
+			Transform& operator=(const Transform& _other) = default;
+			Object& operator=(const Object* _other) override;
 #pragma endregion
 
 	};

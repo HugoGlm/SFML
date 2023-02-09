@@ -2,6 +2,12 @@
 #include "../../PrimaryType/Boolean/Boolean.h"
 
 #pragma region constructor
+Engine::Reflection::FieldInfo::FieldInfo(const FieldInfo& _copy)
+{
+	name = _copy.name;
+	reflectedObject = _copy.reflectedObject;
+	flags = _copy.flags;
+}
 Engine::Reflection::FieldInfo::FieldInfo(const PrimaryType::String& _name, Object* _reflectedObject, BindingFlags _flags)
 {
 	name = _name;

@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine\AssetDataBase\AssetDataBase.cpp" />
+    <ClCompile Include="Engine\PrimaryType\ValueType\ValueType.cpp" />
     <ClCompile Include="Engine\Reflection\Utils\ReflectionUtils.cpp" />
     <ClCompile Include="Engine\Window\Engine\EngineWindow.cpp" />
     <ClCompile Include="Engine\Component\Component.cpp" />
@@ -161,7 +162,6 @@
     <ClCompile Include="Engine\PrimaryType\Boolean\Boolean.cpp" />
     <ClCompile Include="EngineExo.cpp" />
     <ClCompile Include="Engine\Object\Object.cpp" />
-    <ClCompile Include="Engine\PrimaryType\ValueType\ValueType.cpp" />
     <ClCompile Include="Engine\PrimaryType\String\String.cpp" />
     <ClCompile Include="Engine\PrimaryType\Integer\Integer.cpp" />
     <ClCompile Include="Engine\Exception\Exception.cpp" />

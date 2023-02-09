@@ -22,14 +22,14 @@ namespace Engine::Window
 #pragma endregion
 #pragma region constructor
 	public:
-		Window() = delete;
+		Window() = default;
 		Window(const char* _name, const int _width = 800, const int _height = 600)
 		{
 			name = _name;
 			width = _width;
 			height = _height;
 		}
-		Window(const Window&) = delete;
+		Window(const Window&) = default;
 #pragma endregion
 #pragma region methods
 	private:

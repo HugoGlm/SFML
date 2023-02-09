@@ -1,6 +1,11 @@
 #include "GameObjectManager.h"
 #include "../../GameObject/GameObject.h"
 
+Engine::Manager::GameObjectManager::GameObjectManager(const GameObjectManager& _copy)
+{
+	gameobjects = _copy.gameobjects;
+}
+
 void Engine::Manager::GameObjectManager::Register(GameObject* _object)
 {
 	gameobjects.push_back(_object);

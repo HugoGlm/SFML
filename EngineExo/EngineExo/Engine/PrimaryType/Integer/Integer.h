@@ -18,7 +18,6 @@ namespace Engine::PrimaryType
 	public:
 		Integer() = default;
 		Integer(int _value);
-		Integer(const Integer& _copy);
 #pragma endregion
 #pragma region methods
 	public:
