@@ -5,7 +5,7 @@ namespace Engine::Window
 {
 	class EngineWindow;
 }
-namespace Engine::Image
+namespace Engine::UI::Image
 {
 	class Image : public UIElement
 	{
@@ -31,7 +31,7 @@ namespace Engine::Image
 		virtual void SetPosition(const sf::Vector2f& _position) override;
 		virtual void SetScale(const sf::Vector2f& _scale) override;
 		virtual void SetOrigin(const sf::Vector2f& _origin) override;
-		virtual void Draw(Window::EngineWindow* _window) override;
+		virtual void Draw(Window::EngineWindow* _window) const override;
 		virtual sf::FloatRect GetGlobalBounds() override;
 #pragma endregion
 

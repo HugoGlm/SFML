@@ -1,5 +1,7 @@
 #pragma once
 #include "../Window.h"
+#include "../../UI/Shape/Rectangle/RectangleShape.h"
+#include "../../UI/Label/Label.h"
 
 namespace Engine::Window
 {
@@ -9,6 +11,8 @@ namespace Engine::Window
 #pragma region f/p
 	private:
 		sf::Clock clock = sf::Clock();
+		UI::Shape::Rectangle::RectangleShape* button = nullptr;
+		UI::Label::Label* cross = nullptr;
 #pragma region constructor
 	public:
 		EngineWindow();

@@ -4,32 +4,37 @@
 
 namespace Engine
 {
-	class UIElement;
-}
-namespace Engine::Manager
-{
-	class UIElementManager : public Engine::Utils::Singleton<UIElementManager>
+	namespace Window
 	{
-		DECLARE_CLASS_INFO(UIElementManager, Singleton)
+		class EngineWindow;
+	}
+	namespace UI
+	{
+		class UIElement;
+		namespace Manager
+		{
+			class UIElementManager : public Engine::Utils::Singleton<UIElementManager>
+			{
+				DECLARE_CLASS_INFO(UIElementManager, Singleton)
 #pragma region f/p
-	private:
-		std::vector<UIElement*> elements = std::vector<UIElement*>();
+			private:
+				static inline std::vector<UIElement*> elements = std::vector<UIElement*>();
 #pragma endregion
 #pragma region constructor
-	public:
-		UIElementManager() = default;
+			public:
+				UIElementManager() = default;
 #pragma endregion
 #pragma region methods
-	public:
-		void Register(UIElement* _element);
-		void UnRegister(UIElement* _element);
-		void Update();
-#pragma endregion
-#pragma region override
-	public:
-		virtual void OnDestroy() override;
+			public:
+				static void Register(UIElement* _element);
+				static void UnRegister(UIElement* _element);
+				void Update() const;
+				void Draw(Window::EngineWindow* _window) const;
+				void OnDestroy() override;
 #pragma endregion
 
-	};
+			};
+		}
+	}
 }
 

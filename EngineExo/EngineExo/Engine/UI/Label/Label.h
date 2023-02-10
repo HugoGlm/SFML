@@ -5,7 +5,7 @@ namespace Engine::Window
 {
 	class EngineWindow;
 }
-namespace Engine::Label
+namespace Engine::UI::Label
 {
 	class Label : public UIElement
 	{
@@ -17,7 +17,7 @@ namespace Engine::Label
 #pragma endregion
 #pragma region constructor
 	public:
-		Label(Window::EngineWindow* _owner, const char* _text, const char* _font);
+		Label(Window::EngineWindow* _owner, sf::Vector2f _position, const char* _text);
 		~Label() override;
 #pragma endregion
 #pragma region methods
@@ -32,7 +32,7 @@ namespace Engine::Label
 		virtual void SetPosition(const sf::Vector2f& _position) override;
 		virtual void SetScale(const sf::Vector2f& _scale) override;
 		virtual void SetOrigin(const sf::Vector2f& _origin) override;
-		virtual void Draw(Window::EngineWindow* _window) override;
+		virtual void Draw(Window::EngineWindow* _window) const override;
 		virtual sf::FloatRect GetGlobalBounds() override;
 #pragma endregion
 

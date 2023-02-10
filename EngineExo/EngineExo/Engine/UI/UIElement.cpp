@@ -2,26 +2,26 @@
 #include "Manager/UIElementManager.h"
 
 #pragma region constructor
-Engine::UIElement::UIElement(Window::EngineWindow* _window)
+Engine::UI::UIElement::UIElement(Window::EngineWindow* _window)
 {
 	owner = _window;
-	Engine::Manager::UIElementManager::Instance()->Register(this);
+	Engine::UI::Manager::UIElementManager::Instance()->Register(this);
 }
-Engine::UIElement::UIElement(const UIElement& _copy)
+Engine::UI::UIElement::UIElement(const UIElement& _copy)
 {
 	owner = _copy.owner;
 	isInteractable = _copy.isInteractable;
 }
-Engine::UIElement::~UIElement()
+Engine::UI::UIElement::~UIElement()
 {
-	Engine::Manager::UIElementManager::Instance()->UnRegister(this);
+	Engine::UI::Manager::UIElementManager::Instance()->UnRegister(this);
 }
 #pragma endregion
 #pragma region methods
-void Engine::UIElement::OnUpdate()
+void Engine::UI::UIElement::OnUpdate()
 {
 }
-void Engine::UIElement::SetActive(const bool _status)
+void Engine::UI::UIElement::SetActive(const bool _status)
 {
 	isInteractable = _status;
 }

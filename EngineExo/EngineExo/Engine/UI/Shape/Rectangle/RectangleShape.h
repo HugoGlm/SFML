@@ -1,6 +1,6 @@
 #pragma once
-#include "../UIElement.h"
-#include "../../Event/Delegate/Delegate.h"
+#include "../../UIElement.h"
+#include "../../../Event/Delegate/Delegate.h"
 
 namespace Engine
 {
@@ -8,25 +8,21 @@ namespace Engine
 	{
 		class EngineWindow;
 	}
-	namespace UI::Image
+	namespace UI::Shape::Rectangle
 	{
-		class Image;
-	}
-	namespace UI::Button
-	{
-		class Button : public UIElement
+		class RectangleShape : public UIElement
 		{
-			DECLARE_CLASS_INFO(Button, UIElement)
+			DECLARE_CLASS_INFO(RectangleShape, UIElement)
 #pragma region f/p
 		private:
-			Image::Image* image = nullptr;
+			sf::RectangleShape* shape = nullptr;
 		public:
 			Event::Delegate<void> OnClick = nullptr;
 #pragma endregion
 #pragma region constructor
 		public:
-			Button(Window::EngineWindow* _owner, const char* _path);
-			virtual ~Button() override;
+			RectangleShape(Window::EngineWindow* _owner, sf::Vector2f _size, sf::Vector2f _position);
+			virtual ~RectangleShape() override;
 #pragma endregion
 #pragma region override
 		public:
@@ -40,3 +36,4 @@ namespace Engine
 		};
 	}
 }
+

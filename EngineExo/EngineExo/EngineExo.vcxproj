@@ -141,6 +141,8 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\UI\Shape\Circle\CircleShape.cpp" />
+    <ClCompile Include="Engine\UI\Shape\Rectangle\RectangleShape.cpp" />
     <ClCompile Include="Engine\UI\Button\Button.cpp" />
     <ClCompile Include="Engine\AssetDataBase\AssetDataBase.cpp" />
     <ClCompile Include="Engine\PrimaryType\ValueType\ValueType.cpp" />
@@ -177,6 +179,8 @@
     <ClCompile Include="Engine\UI\UIElement.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\UI\Shape\Circle\CircleShape.h" />
+    <ClInclude Include="Engine\UI\Shape\Rectangle\RectangleShape.h" />
     <ClInclude Include="Engine\UI\Button\Button.h" />
     <ClInclude Include="Engine\AssetDataBase\AssetDataBase.h" />
     <ClInclude Include="Engine\Reflection\Utils\ReflectionUtils.h" />

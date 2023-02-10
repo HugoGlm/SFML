@@ -10,7 +10,8 @@
 
 int main()
 {
-
+	Engine::Window::EngineWindow::Instance()->Open();
+	Engine::Window::EngineWindow::Instance()->Destroy();
 
 	//Test::JsonTest::Test();
 	

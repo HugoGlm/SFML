@@ -1,14 +1,15 @@
 #include "UIElementManager.h"
 #include "../UIElement.h"
+#include "../../Window/Engine/EngineWindow.h"
 
-Engine::Manager::UIElementManager::UIElementManager(const UIElementManager&) = default;
+Engine::UI::Manager::UIElementManager::UIElementManager(const UIElementManager&) = default;
 
 #pragma region methods
-void Engine::Manager::UIElementManager::Register(UIElement* _element)
+void Engine::UI::Manager::UIElementManager::Register(UIElement* _element)
 {
 	elements.push_back(_element);
 }
-void Engine::Manager::UIElementManager::UnRegister(UIElement* _element)
+void Engine::UI::Manager::UIElementManager::UnRegister(UIElement* _element)
 {
 	const size_t _size = elements.size();
 	for (size_t i = 0; i < _size; i++)
@@ -20,7 +21,7 @@ void Engine::Manager::UIElementManager::UnRegister(UIElement* _element)
 		}
 	}
 }
-void Engine::Manager::UIElementManager::Update()
+void Engine::UI::Manager::UIElementManager::Update() const
 {
 	const size_t _size = elements.size();
 	for (size_t i = 0; i < _size; i++)
@@ -28,10 +29,12 @@ void Engine::Manager::UIElementManager::Update()
 		elements[i]->OnUpdate();
 	}
 }
-#pragma endregion
-
-#pragma region override
-void Engine::Manager::UIElementManager::OnDestroy()
+void Engine::UI::Manager::UIElementManager::Draw(Window::EngineWindow* _window) const
+{
+	for (const UIElement* _object : elements)
+		_object->Draw(_window);
+}
+void Engine::UI::Manager::UIElementManager::OnDestroy()
 {
 	const size_t _size = elements.size();
 	for (size_t i = 0; i < _size; i++)
