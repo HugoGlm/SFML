@@ -17,7 +17,7 @@ namespace Engine::UI::Label
 #pragma endregion
 #pragma region constructor
 	public:
-		Label(Window::EngineWindow* _owner, sf::Vector2f _position, const char* _text);
+		Label(Window::EngineWindow* _owner, sf::Vector2f _position, const std::string _text);
 		~Label() override;
 #pragma endregion
 #pragma region methods
@@ -25,7 +25,7 @@ namespace Engine::UI::Label
 		void Free();
 		void SetCharacterSize(const int _size);
 		void SetColor(const sf::Color _color);
-		void SetText(const char* _text);
+		void SetText(const std::string _text);
 #pragma endregion
 #pragma region override
 	public:

@@ -2,7 +2,7 @@
 #include "../../Window/Engine/EngineWindow.h"
 
 #pragma region constructor
-Engine::UI::Label::Label::Label(Window::EngineWindow* _owner, sf::Vector2f _position, const char* _text) : UIElement(_owner)
+Engine::UI::Label::Label::Label(Window::EngineWindow* _owner, sf::Vector2f _position, const std::string _text) : UIElement(_owner)
 {
 	text = new sf::Text();
 	text->setString(_text);
@@ -42,7 +42,7 @@ void Engine::UI::Label::Label::SetColor(const sf::Color _color)
 {
 	text->setColor(_color);
 }
-void Engine::UI::Label::Label::SetText(const char* _text)
+void Engine::UI::Label::Label::SetText(const std::string _text)
 {
 	text->setString(_text);
 }
