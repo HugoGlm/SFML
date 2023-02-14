@@ -102,7 +102,7 @@
     <ClCompile Include="Engine\PrimaryType\ValueType\ValueType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\UI\UIElement.cpp">
+    <ClCompile Include="Engine\UI\Element\UIElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\UI\Manager\UIElementManager.cpp">
@@ -121,6 +121,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\UI\Shape\Circle\CircleShape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Manager\FontManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\UI\Button\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Manager\EventSystem\EventSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -263,7 +272,7 @@
     <ClInclude Include="Test\Reflection\Json\ATest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\UI\UIElement.h">
+    <ClInclude Include="Engine\UI\Element\UIElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\UI\Manager\UIElementManager.h">
@@ -282,6 +291,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine\UI\Shape\Circle\CircleShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Manager\FontManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\UI\Interface\IPointerClickHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\UI\Button\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\UI\Interface\IPointerEnterHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\UI\Interface\IPointerExitHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Manager\EventSystem\EventSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

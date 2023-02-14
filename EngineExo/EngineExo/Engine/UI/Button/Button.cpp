@@ -1,43 +1,77 @@
 #include "Button.h"
-#include "../Image/Image.h"
-#include "../../Window/Engine/EngineWindow.h"
+#include "../../Manager/FontManager.h"
 
 #pragma region constructor
-Engine::UI::Button::Button::Button(Window::EngineWindow* _owner, const char* _path) : UIElement(_owner)
+Engine::UI::Button::Button(const std::string& _text, float _width, float _height) : super()
 {
-	image = new UI::Image::Image(_owner, _path);
+	width = _width;
+	height = _height;
+	shape = new sf::RectangleShape(sf::Vector2f(width, height));
+	shape->setFillColor(baseColor);
+	text.setString(_text);
+	text.setFont(*Manager::FontManager::Instance()->GetFont("aAbsoluteEmpire"));
+	text.setCharacterSize(12);
+	text.setOrigin(shape->getOrigin());
+	text.setFillColor(sf::Color::Black);
 }
-Engine::UI::Button::Button::Button(const Button& _copy) : UIElement(_copy)
+Engine::UI::Button::Button(const std::string& _text, float _width, float _height, Action<> _onClick)
+	: self(_text, _width, _height)
 {
-	image = _copy.image;
+	onClick = _onClick;
 }
-Engine::UI::Button::Button::~Button()
+Engine::UI::Button::Button(const Button& _copy) : super(_copy)
 {
-	delete image;
-	image = nullptr;
-	OnClick = nullptr;
+	width = _copy.width;
+	height = _copy.height;
+	text = _copy.text;
+	baseColor = _copy.baseColor;
+	onClick = _copy.onClick;
+
+}
+#pragma endregion
+
+#pragma region methods
+void Engine::UI::Button::SetBackgroundColor(const sf::Color& _color)
+{
+	checkLow((shape != nullptr), "shape is nullptr")
+		baseColor = _color;
+	shape->setFillColor(baseColor);
 }
 #pragma endregion
 
 #pragma region override
-void Engine::UI::Button::Button::SetPosition(const sf::Vector2f& _position)
+void Engine::UI::Button::SetPosition(const PrimaryType::Vector2& _position)
 {
-	image->SetPosition(_position);
+	super::SetPosition(_position);
+	const sf::FloatRect _shapeBounds = shape->getGlobalBounds();
+	const sf::FloatRect _textBounds = text.getGlobalBounds();
+	const float _x = _shapeBounds.left + (_shapeBounds.width / 2) - (_textBounds.width / 2);
+	const float _y = _shapeBounds.top + (_shapeBounds.height / 2) - _textBounds.height;
+	text.setPosition(_x, _y);
 }
-void Engine::UI::Button::Button::SetScale(const sf::Vector2f& _scale)
+void Engine::UI::Button::Draw(sf::RenderWindow* _window)
 {
-	image->SetScale(_scale);
+	super::Draw(_window);
+	_window->draw(text);
 }
-void Engine::UI::Button::Button::SetOrigin(const sf::Vector2f& _origin)
+void Engine::UI::Button::OnPointerClick(const sf::Event& _event)
 {
-	image->SetOrigin(_origin);
+	if (!canInteract) 
+		return;
+	onClick.Invoke();
 }
-void Engine::UI::Button::Button::Draw(Window::EngineWindow* _window) const
+void Engine::UI::Button::OnPointerEnter()
 {
-	image->Draw(_window);
+	checkLow((shape != nullptr), "shape is nullptr !")
+		if (!canInteract)
+			return;
+	shape->setFillColor(enterColor);
 }
-sf::FloatRect Engine::UI::Button::Button::GetGlobalBounds()
+void Engine::UI::Button::OnPointerExit()
 {
-	return image->GetGlobalBounds();
+	checkLow((shape != nullptr), "shape is nullptr !")
+		if (!canInteract)
+			return;
+	shape->setFillColor(baseColor);
 }
 #pragma endregion

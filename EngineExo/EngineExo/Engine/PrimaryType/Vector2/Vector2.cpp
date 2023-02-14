@@ -4,6 +4,11 @@
 #include "../../Reflection/Utils/ReflectionUtils.h"
 
 #pragma region constructor
+Engine::PrimaryType::Vector2::Vector2(const sf::Vector2f& _value)
+{
+	x = _value.x;
+	y = _value.y;
+}
 Engine::PrimaryType::Vector2::Vector2(float _x, float _y)
 {
 	x = _x;
