@@ -17,7 +17,7 @@ void Engine::Manager::TextureManager::LoadTexture(const char* _path)
 		if (!_entry.is_regular_file())
 			continue;
 		const fs::path _filePath = _entry.path();
-		if (_filePath.extension() != ".ttf" && _filePath.extension() != ".otf")
+		if (_filePath.extension() != ".png" && _filePath.extension() != ".jpg")
 			continue;
 		sf::Texture* _texture = new sf::Texture();
 		if (!_texture->loadFromFile(_filePath.string()))
