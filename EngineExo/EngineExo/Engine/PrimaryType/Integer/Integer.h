@@ -29,10 +29,10 @@ namespace Engine::PrimaryType
 		String ToString() const override;
 		void SerializeField(std::ostream& _os, const String& _fieldName, int _index) override;
 		void DeSerializeField(std::istream& _is, const String& _fieldName) override;
+		Object& operator=(const Object* _other) override;
 #pragma endregion
 #pragma region operator
 	public:
-		Object& operator=(const Object* _other) override;
 		Integer& operator=(const Integer& _other);
 		operator int();
 		operator int() const;

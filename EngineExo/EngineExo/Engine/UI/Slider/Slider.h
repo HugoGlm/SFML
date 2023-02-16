@@ -2,6 +2,7 @@
 #include "../Element/UIElement.h"
 #include "../../Event/Action/Action.h"
 #include "../Interface/IPointerMoveHandler.h"
+#include "../../PrimaryType/Float/Float.h"
 
 namespace Engine::UI
 {
@@ -31,6 +32,7 @@ namespace Engine::UI
 		void SetValue(float _value);
 		void SetMin(float _min);
 		void SetMax(float _max);
+		Engine::PrimaryType::Float Value();
 #pragma endregion
 #pragma region override
 	public:

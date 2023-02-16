@@ -27,6 +27,10 @@ namespace Engine::UI
 #pragma endregion
 #pragma region methods
 	public:
+		void SetShape(sf::Shape* _shape);
+		void SetOutlineThickness(float _trickness);
+		void SetOutlineColor(sf::Color _color);
+		void SetColor(sf::Color _color);
 		virtual void SetPosition(const PrimaryType::Vector2& _position);
 		virtual void SetRotation(float _angle);
 		virtual void SetOrigin(const PrimaryType::Vector2& _origin);
@@ -41,7 +45,7 @@ namespace Engine::UI
 		virtual float Rotation() const;
 		virtual PrimaryType::Vector2 Scale() const;
 		virtual PrimaryType::Vector2 Origin() const;
-		virtual PrimaryType::String Label() const;
+		virtual PrimaryType::String LabelText() const;
 		virtual void Draw(sf::RenderWindow* _window);
 #pragma endregion
 #pragma region operator

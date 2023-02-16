@@ -13,6 +13,11 @@ namespace Engine::Window
 	public:
 		EngineWindow();
 #pragma endregion
+#pragma region methods
+	private:
+		void InitInspectorBox();
+		void InitAssetBox();
+#pragma endregion
 #pragma region override
 	public:
 		void Test();

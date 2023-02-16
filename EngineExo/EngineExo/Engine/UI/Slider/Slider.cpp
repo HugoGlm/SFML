@@ -46,7 +46,10 @@ Engine::UI::Slider::~Slider()
 #pragma region methods
 void Engine::UI::Slider::UpdateHandlePosition()
 {
-	const float _x = maxValue * currentValue / 100.0f + shape->getPosition().x;
+	float _diff = maxValue - minValue;
+	float _diffNewValue = currentValue - minValue;
+	float _boxSizeDiff = box->getSize().x / _diff;
+	float _x = (_boxSizeDiff * _diffNewValue) + shape->getPosition().x;
 	handle->setPosition(sf::Vector2f(_x, handle->getPosition().y));
 }
 void Engine::UI::Slider::SetValue(float _value)
@@ -63,6 +66,10 @@ void Engine::UI::Slider::SetMax(float _max)
 {
 	maxValue = _max;
 }
+Engine::PrimaryType::Float Engine::UI::Slider::Value()
+{
+	return currentValue;
+}
 #pragma endregion
 
 #pragma region override
@@ -77,12 +84,13 @@ void Engine::UI::Slider::Draw(sf::RenderWindow* _window)
 void Engine::UI::Slider::SetPosition(const PrimaryType::Vector2& _position)
 {
 	super::SetPosition(_position);
-	box->setPosition(_position + PrimaryType::Vector2(labelText.getGlobalBounds().width + 40, 5));
-	handle->setPosition((shape->getPosition() - sf::Vector2f(0, 10) + sf::Vector2f(labelText.getGlobalBounds().width + 40, 5)));
+	box->setPosition(_position);
+	handle->setPosition((_position - sf::Vector2f(0, 5)));
 }
 void Engine::UI::Slider::OnPointerMove(float _x, float _y)
 {
-	SetValue(_x - shape->getPosition().x);
+	const float _newValue = minValue + (_x - shape->getPosition().x) / box->getSize().x * (maxValue - minValue);
+	SetValue(_newValue);
 }
 #pragma endregion
 

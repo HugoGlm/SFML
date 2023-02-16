@@ -152,6 +152,7 @@
     <ClCompile Include="Engine\Manager\FontManager.cpp" />
     <ClCompile Include="Engine\Manager\EventSystem\EventSystem.cpp" />
     <ClCompile Include="Engine\UI\Slider\Slider.cpp" />
+    <ClCompile Include="Engine\UI\Label\Label.cpp" />
     <ClCompile Include="Test\Reflection\Json\JsonTest.cpp" />
     <ClCompile Include="Test\Component\PlayerComponent.cpp" />
     <ClCompile Include="Test\PrimaryType\ListTest\ListTest.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="Engine\UI\Element\UIElement.cpp" />
     <ClCompile Include="Engine\UI\Toggle\Toggle.cpp" />
     <ClCompile Include="Engine\Manager\Texture\TextureManager.cpp" />
+    <ClCompile Include="Engine\UI\TextField\TextField.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\UI\Button\Button.h" />
@@ -186,6 +188,7 @@
     <ClInclude Include="Engine\AssetDataBase\AssetDataBase.h" />
     <ClInclude Include="Engine\Reflection\Utils\ReflectionUtils.h" />
     <ClInclude Include="Engine\UI\Interface\IPointerMoveHandler.h" />
+    <ClInclude Include="Engine\UI\Interface\ITextEntered.h" />
     <ClInclude Include="Engine\Utils\ObjectMacro.h" />
     <ClInclude Include="Engine\Window\Engine\EngineWindow.h" />
     <ClInclude Include="Engine\Component\Component.h" />
@@ -201,6 +204,7 @@
     <ClInclude Include="Engine\Manager\FontManager.h" />
     <ClInclude Include="Engine\Manager\EventSystem\EventSystem.h" />
     <ClInclude Include="Engine\UI\Slider\Slider.h" />
+    <ClInclude Include="Engine\UI\Label\Label.h" />
     <ClInclude Include="Test\Reflection\Json\ATest.h" />
     <ClInclude Include="Test\Reflection\Json\JsonTest.h" />
     <ClInclude Include="Test\Component\PlayerComponent.h" />
@@ -236,6 +240,7 @@
     <ClInclude Include="Engine\UI\Element\UIElement.h" />
     <ClInclude Include="Engine\UI\Toggle\Toggle.h" />
     <ClInclude Include="Engine\Manager\Texture\TextureManager.h" />
+    <ClInclude Include="Engine\UI\TextField\TextField.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\a.asset" />

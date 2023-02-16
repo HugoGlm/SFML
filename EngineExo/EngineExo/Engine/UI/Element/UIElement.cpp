@@ -35,24 +35,40 @@ Engine::UI::UIElement::~UIElement()
 #pragma endregion
 
 #pragma region methods
+void Engine::UI::UIElement::SetShape(sf::Shape* _shape)
+{
+	shape = _shape;
+}
+void Engine::UI::UIElement::SetOutlineThickness(float _trickness)
+{
+	shape->setOutlineThickness(_trickness);
+}
+void Engine::UI::UIElement::SetOutlineColor(sf::Color _color)
+{
+	shape->setOutlineColor(_color);
+}
+void Engine::UI::UIElement::SetColor(sf::Color _color)
+{
+	shape->setFillColor(_color);
+}
 void Engine::UI::UIElement::SetPosition(const PrimaryType::Vector2& _position)
 {
-	check((shape != nullptr), "shape is nullptr")
+	checkLow((shape != nullptr), "shape is nullptr")
 	shape->setPosition(_position);
 }
 void Engine::UI::UIElement::SetRotation(float _angle)
 {
-	check((shape != nullptr), "shape is nullptr")
+	checkLow((shape != nullptr), "shape is nullptr")
 	shape->setRotation(_angle);
 }
 void Engine::UI::UIElement::SetOrigin(const PrimaryType::Vector2& _origin)
 {
-	check((shape != nullptr), "shape is nullptr")
+	checkLow((shape != nullptr), "shape is nullptr")
 		shape->setOrigin(_origin);
 }
 void Engine::UI::UIElement::SetScale(const PrimaryType::Vector2& _scale)
 {
-	check((shape != nullptr), "shape is nullptr")
+	checkLow((shape != nullptr), "shape is nullptr")
 		shape->setScale(_scale);
 }
 void Engine::UI::UIElement::SetIsActive(bool _status)
@@ -99,13 +115,13 @@ Engine::PrimaryType::Vector2 Engine::UI::UIElement::Origin() const
 	check((shape != nullptr), "shape is nullptr", PrimaryType::Vector2(0, 0))
 	return shape->getOrigin();
 }
-Engine::PrimaryType::String Engine::UI::UIElement::Label() const
+Engine::PrimaryType::String Engine::UI::UIElement::LabelText() const
 {
 	return labelText.getString().toAnsiString().c_str();
 }
 void Engine::UI::UIElement::Draw(sf::RenderWindow* _window)
 {
-	checkLow((shape != nullptr), "shape is nullptr for draw")
+	checkLow((shape != nullptr), "shape is nullptr for draw !")
 	_window->draw(labelText);
 	_window->draw(*shape);
 }

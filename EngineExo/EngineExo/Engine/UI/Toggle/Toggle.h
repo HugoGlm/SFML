@@ -28,6 +28,7 @@ namespace Engine::UI
 #pragma region override
 	public:
 		void OnPointerClick(const sf::Event& _event) override;
+		void OnPointerUnClick() override{}
 #pragma endregion
 
 

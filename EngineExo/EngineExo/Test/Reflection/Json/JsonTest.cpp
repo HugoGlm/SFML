@@ -5,8 +5,9 @@
 
 void Test::JsonTest::Test()
 {
-	ATest a = ATest();
 	const std::string _path = std::filesystem::current_path().parent_path().string();
+
+	ATest a = ATest();
 	std::ofstream _outFile = std::ofstream(_path + "\\a.asset");
 	a.Serialize(_outFile);
 	_outFile.close();

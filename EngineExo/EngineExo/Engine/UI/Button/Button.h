@@ -46,6 +46,7 @@ namespace Engine::UI
 		virtual void OnPointerClick(const sf::Event& _event) override;
 		virtual void OnPointerEnter() override;
 		virtual void OnPointerExit() override;
+		void OnPointerUnClick() override {}
 #pragma endregion
 
 

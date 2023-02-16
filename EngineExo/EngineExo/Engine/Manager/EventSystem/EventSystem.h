@@ -6,6 +6,9 @@ namespace Engine::UI
 {
 	class UIElement;
 }
+
+class IPointerClickHandler;
+
 namespace Engine::Manager
 {
 	class EventSystem : public Utils::Singleton<EventSystem>
@@ -15,6 +18,7 @@ namespace Engine::Manager
 	private:
 		std::vector<UI::UIElement*> elements = std::vector<UI::UIElement*>();
 		std::vector<UI::UIElement*> hoveredElements = std::vector<UI::UIElement*>();
+		IPointerClickHandler* pointerClickHandler = nullptr;
 #pragma endregion
 #pragma region constructor
 	public:
@@ -27,6 +31,7 @@ namespace Engine::Manager
 		void CheckEnterHandler(Engine::UI::UIElement*& _element);
 		void CheckPointerClickHandler(Engine::UI::UIElement* _element, const sf::Event& _event);
 		void CheckPointerMoveHandler(const sf::Event& _event, Engine::UI::UIElement* _element);
+		void CheckTextEntered(const sf::Event& _event, Engine::UI::UIElement* _element);
 	public:
 		void Register(UI::UIElement* _element);
 		void UnRegister(UI::UIElement* _element);
