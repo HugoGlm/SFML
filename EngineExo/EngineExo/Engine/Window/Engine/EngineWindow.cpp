@@ -10,6 +10,7 @@
 #include "../../UI/Label/Label.h"
 #include "../../PrimaryType/Vector2/Vector2.h"
 #include <format>
+#include <iostream>
 
 #pragma region constructor
 Engine::Window::EngineWindow::EngineWindow() : super("Engine", 1920, 1080)
@@ -59,9 +60,10 @@ void Engine::Window::EngineWindow::Test()
 	slider->SetValue(50);
 
 	UI::Label* pourcentage = new UI::Label();
-	pourcentage->SetLabel(std::format("{}", slider->Value()).c_str());
-	pourcentage->SetPosition(PrimaryType::Vector2(1850, 95));
-
+	pourcentage->SetLabel(std::format("{}", slider->Value()).c_str());// -> ACTIONINTERNAL<VOID, FLOAT>
+	std::cout << std::format("{}", slider->Value()) << std::endl;
+	pourcentage->SetPosition(PrimaryType::Vector2(1000, 500)); // 1850, 95
+	
 	UI::TextField* textField = new UI::TextField();
 	textField->SetPosition(PrimaryType::Vector2(1700, 200));
 
