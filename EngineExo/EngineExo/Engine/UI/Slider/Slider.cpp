@@ -66,10 +66,9 @@ void Engine::UI::Slider::SetMax(float _max)
 {
 	maxValue = _max;
 }
-Engine::PrimaryType::String Engine::UI::Slider::Value()
+float Engine::UI::Slider::Value()
 {
-	PrimaryType::String _value = onValueChanged.ToString();
-	return _value;
+	return currentValue;
 }
 #pragma endregion
 

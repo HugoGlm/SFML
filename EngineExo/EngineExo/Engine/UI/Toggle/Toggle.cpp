@@ -29,6 +29,10 @@ void Engine::UI::Toggle::SetStatus(bool _status)
 	status = _status;
 	shape->setTexture(status ? toggleTrueTexture : toggleFalseTexture);
 }
+bool Engine::UI::Toggle::Status()
+{
+	return status;
+}
 #pragma endregion
 
 #pragma region override

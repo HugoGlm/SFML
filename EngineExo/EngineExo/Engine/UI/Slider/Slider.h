@@ -32,7 +32,7 @@ namespace Engine::UI
 		void SetValue(float _value);
 		void SetMin(float _min);
 		void SetMax(float _max);
-		Engine::PrimaryType::String Value();
+		float Value();
 #pragma endregion
 #pragma region override
 	public:

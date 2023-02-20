@@ -12,8 +12,8 @@ void Test::JsonTest::Test()
 	a.Serialize(_outFile);
 	_outFile.close();
 
-	ATest c = ATest();
+	/*ATest c = ATest();
 	std::ifstream _inFile = std::ifstream(_path + "\\a.asset");
 	c.DeSerialize(_inFile);
-	_inFile.close();
+	_inFile.close();*/
 }

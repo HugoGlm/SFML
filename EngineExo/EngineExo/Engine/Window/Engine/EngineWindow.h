@@ -1,5 +1,8 @@
 #pragma once
 #include "../Window.h"
+#include "../../UI/Slider/Slider.h"
+#include "../../UI/Label/Label.h"
+#include "../../UI/Toggle/Toggle.h"
 
 namespace Engine::Window
 {
@@ -9,6 +12,10 @@ namespace Engine::Window
 #pragma region f/p
 	private:
 		sf::Clock clock = sf::Clock();
+		UI::Slider* slider = nullptr;
+		UI::Label* pourcentage = new UI::Label();
+		UI::Toggle* toggle = new UI::Toggle(true);
+		bool isActive = false;
 #pragma region constructor
 	public:
 		EngineWindow();

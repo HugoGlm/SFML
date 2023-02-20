@@ -4,20 +4,20 @@
 #include "../../PrimaryType/Vector2/Vector2.h"
 
 #pragma region constructor
-Engine::UI::Label::Label()
+Engine::UI::Label::Label() : super()
 {
     text.setFont(*Manager::FontManager::Instance()->GetFont("aAbsoluteEmpire"));
     text.setCharacterSize(12);
     text.setString("");
     Manager::EventSystem::Instance()->Register(this);
 }
-Engine::UI::Label::Label(const char* _text, int _characterSize, const char* _fontName)
+Engine::UI::Label::Label(const char* _text, int _characterSize, const char* _fontName) : self()
 {
     text.setString(_text);
     text.setCharacterSize(_characterSize);
     text.setFont(*Manager::FontManager::Instance()->GetFont(_fontName));
 }
-Engine::UI::Label::Label(const Label& _copy)
+Engine::UI::Label::Label(const Label& _copy) : super(_copy)
 {
     text = _copy.text;
 }
