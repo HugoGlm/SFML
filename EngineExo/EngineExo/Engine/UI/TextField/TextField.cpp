@@ -55,7 +55,7 @@ void Engine::UI::TextField::SetPosition(const PrimaryType::Vector2& _position)
 }
 void Engine::UI::TextField::OnPointerEnter()
 {
-	shape->setFillColor(sf::Color(67, 82, 72, 255));
+	shape->setFillColor(sf::Color(40, 40, 40));
 }
 void Engine::UI::TextField::OnPointerExit()
 {
@@ -88,5 +88,9 @@ void Engine::UI::TextField::OnTextEntered(sf::Uint32 _unicode)
 	else if (_unicode < 128)
 		inputText += _unicode;
 	text.setString(inputText);
+}
+sf::Text Engine::UI::TextField::Text()
+{
+	return text;
 }
 #pragma endregion

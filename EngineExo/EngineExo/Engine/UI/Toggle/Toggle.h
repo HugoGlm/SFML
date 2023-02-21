@@ -24,7 +24,7 @@ namespace Engine::UI
 #pragma region methods
 	public:
 		void SetStatus(bool _status);
-		bool Status();
+		std::string Status();
 #pragma endregion
 #pragma region override
 	public:

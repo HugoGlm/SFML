@@ -37,6 +37,7 @@ namespace Engine::UI
 		void OnPointerClick(const sf::Event& _event) override;
 		void OnPointerUnClick() override;
 		void OnTextEntered(sf::Uint32 _unicode) override;
+		sf::Text Text();
 #pragma endregion
 	};
 }

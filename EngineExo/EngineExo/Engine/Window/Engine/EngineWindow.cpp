@@ -3,10 +3,6 @@
 #include "../../Manager/EventSystem/EventSystem.h"
 #include "../../Time/Time.h"
 #include "../../Utils/CoreDefine.h"
-#include "../../UI/Button/Button.h"
-
-#include "../../UI/TextField/TextField.h"
-
 #include "../../PrimaryType/Vector2/Vector2.h"
 #include <format>
 #include <iostream>
@@ -42,9 +38,10 @@ void Engine::Window::EngineWindow::InitAssetBox()
 	_assetBox->SetOutlineColor(sf::Color(211, 211, 211));
 	_assetBox->SetColor(sf::Color::Transparent);
 
-	UI::Button* _buttonTest = new UI::Button("Test", 50, 50);
-	_buttonTest->AddListener<EngineWindow>(this, &EngineWindow::Test);
-	_buttonTest->SetPosition(PrimaryType::Vector2(50, 900));
+	buttonTest = new UI::Button("Test", 50, 50);
+	buttonTest->SetIsActive(true);
+	buttonTest->AddListener<EngineWindow>(this, &EngineWindow::Test);
+	buttonTest->SetPosition(PrimaryType::Vector2(50, 900));
 
 	UI::Label* _assetText = new UI::Label("Asset");
 	_assetText->SetPosition(PrimaryType::Vector2(10, 800));
@@ -55,14 +52,35 @@ void Engine::Window::EngineWindow::InitAssetBox()
 void Engine::Window::EngineWindow::Test()
 {
 	isActive = true;
+
+	buttonTest->SetIsActive(false);
+
+	buttonBack->SetIsActive(true);
+	buttonBack = new UI::Button("back", 100, 30);
+	buttonBack->AddListener<EngineWindow>(this, &EngineWindow::Back);
+	buttonBack->SetPosition(PrimaryType::Vector2(50, 850));
+
 	slider = new UI::Slider();
 	slider->SetPosition(PrimaryType::Vector2(1700, 100));
 	slider->SetValue(50);
 
-	UI::TextField* textField = new UI::TextField();
+	textField = new UI::TextField();
 	textField->SetPosition(PrimaryType::Vector2(1700, 200));
 
+	toggle = new UI::Toggle(true);
 	toggle->SetPosition(PrimaryType::Vector2(1700, 300));
+}
+void Engine::Window::EngineWindow::Back()
+{
+	isActive = false;
+	buttonBack->SetIsActive(false);
+	slider->SetIsActive(false);
+	textField->SetIsActive(false);
+	toggle->SetIsActive(false);
+	percentage->SetIsActive(false);
+	boolean->SetIsActive(false);
+	text->SetIsActive(false);
+	InitAssetBox();
 }
 void Engine::Window::EngineWindow::Open()
 {
@@ -74,10 +92,17 @@ void Engine::Window::EngineWindow::OnUpdate()
 {
 	if (isActive == true)
 	{
-		pourcentage->SetLabel(std::to_string(slider->Value()).c_str());
-		pourcentage->SetPosition(PrimaryType::Vector2(1850, 95));
-		pourcentage->SetLabel(std::to_string(toggle->Status()).c_str());
-		pourcentage->SetPosition(PrimaryType::Vector2(1800, 300));
+		percentage->SetLabel(std::to_string(slider->Value()).c_str());
+		percentage->SetPosition(PrimaryType::Vector2(1850, 95));
+		percentage->SetIsActive(true);
+
+		boolean->SetLabel(toggle->Status().c_str());
+		boolean->SetPosition(PrimaryType::Vector2(1750, 315));
+		boolean->SetIsActive(true);
+
+		text->SetLabel(textField->Text().getString().toAnsiString().c_str());
+		text->SetPosition(PrimaryType::Vector2(1700, 250));
+		text->SetIsActive(true);
 	}
 
 	Time::deltaTime = clock.restart().asSeconds();

@@ -3,6 +3,8 @@
 #include "../../UI/Slider/Slider.h"
 #include "../../UI/Label/Label.h"
 #include "../../UI/Toggle/Toggle.h"
+#include "../../UI/Button/Button.h"
+#include "../../UI/TextField/TextField.h"
 
 namespace Engine::Window
 {
@@ -12,9 +14,14 @@ namespace Engine::Window
 #pragma region f/p
 	private:
 		sf::Clock clock = sf::Clock();
+		UI::Button* buttonTest = nullptr;
+		UI::Button* buttonBack = nullptr;
 		UI::Slider* slider = nullptr;
-		UI::Label* pourcentage = new UI::Label();
-		UI::Toggle* toggle = new UI::Toggle(true);
+		UI::Toggle* toggle = nullptr;
+		UI::TextField* textField = nullptr;
+		UI::Label* percentage = new UI::Label();
+		UI::Label* boolean = new UI::Label();
+		UI::Label* text = new UI::Label();
 		bool isActive = false;
 #pragma region constructor
 	public:
@@ -28,6 +35,7 @@ namespace Engine::Window
 #pragma region override
 	public:
 		void Test();
+		void Back();
 		void Open() override;
 		void OnUpdate() override;
 		void OnClear() const override;
