@@ -6,7 +6,6 @@
 
 namespace Test
 {
-	UCLASS()
 	class ATest : public Engine::Object
 	{
 	private:

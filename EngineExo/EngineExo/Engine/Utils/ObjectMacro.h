@@ -2,6 +2,9 @@
 
 #define REGISTER_TYPE(type) const size_t Type##type = TypeOfData::Register(#type, new type());
 
+namespace Engine { class Object;  }
+namespace Test {}
+
 struct TypeOfData
 {
 	static inline std::map<std::string, Engine::Object*> Types = std::map<std::string, Engine::Object*>();

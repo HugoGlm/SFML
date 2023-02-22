@@ -96,6 +96,15 @@ namespace Engine::Window
 		{
 			renderer->display();
 		}
+	public:
+		PrimaryType::Integer Width() const
+		{
+			return width;
+		}
+		PrimaryType::Integer Height() const
+		{
+			return height;
+		}
 #pragma endregion
 #pragma region override
 	public:

@@ -27,6 +27,6 @@ REGISTER_TYPE(FieldInfo)
 
 using namespace Test;
 
-#include "Test\Reflection\Json\ATest.h"
-REGISTER_TYPE(ATest)
+#include "Test\Component\PlayerComponent.h"
+REGISTER_TYPE(PlayerComponent)
 

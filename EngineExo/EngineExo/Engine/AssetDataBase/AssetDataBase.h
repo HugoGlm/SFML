@@ -9,6 +9,7 @@ namespace Engine
 #pragma region methods
 	public:
 		static void CreateAsset(Object* _asset, PrimaryType::String _path);
+		static std::vector<Object*> LoadAllAssets();
 #pragma endregion
 
 	};

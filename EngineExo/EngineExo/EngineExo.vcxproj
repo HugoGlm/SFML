@@ -141,6 +141,10 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Editor\Editor.cpp" />
+    <ClCompile Include="Engine\UI\AssetButton\AssetButton.cpp" />
+    <ClCompile Include="Engine\Editor\Asset\AssetWindow.cpp" />
+    <ClCompile Include="Engine\Editor\Window\EditorWindow.cpp" />
     <ClCompile Include="Engine\UI\Button\Button.cpp" />
     <ClCompile Include="Engine\AssetDataBase\AssetDataBase.cpp" />
     <ClCompile Include="Engine\PrimaryType\ValueType\ValueType.cpp" />
@@ -153,6 +157,8 @@
     <ClCompile Include="Engine\Manager\EventSystem\EventSystem.cpp" />
     <ClCompile Include="Engine\UI\Slider\Slider.cpp" />
     <ClCompile Include="Engine\UI\Label\Label.cpp" />
+    <ClCompile Include="Engine\IO\File.cpp" />
+    <ClCompile Include="Engine\Editor\Inspector\InspectorWindow.cpp" />
     <ClCompile Include="Test\Reflection\Json\JsonTest.cpp" />
     <ClCompile Include="Test\Component\PlayerComponent.cpp" />
     <ClCompile Include="Test\PrimaryType\ListTest\ListTest.cpp" />
@@ -181,6 +187,10 @@
     <ClCompile Include="Engine\UI\TextField\TextField.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Editor\Editor.h" />
+    <ClInclude Include="Engine\UI\AssetButton\AssetButton.h" />
+    <ClInclude Include="Engine\Editor\Asset\AssetWindow.h" />
+    <ClInclude Include="Engine\Editor\Window\EditorWindow.h" />
     <ClInclude Include="Engine\UI\Button\Button.h" />
     <ClInclude Include="Engine\UI\Interface\IPointerClickHandler.h" />
     <ClInclude Include="Engine\UI\Interface\IPointerEnterHandler.h" />
@@ -205,6 +215,8 @@
     <ClInclude Include="Engine\Manager\EventSystem\EventSystem.h" />
     <ClInclude Include="Engine\UI\Slider\Slider.h" />
     <ClInclude Include="Engine\UI\Label\Label.h" />
+    <ClInclude Include="Engine\IO\File.h" />
+    <ClInclude Include="Engine\Editor\Inspector\InspectorWindow.h" />
     <ClInclude Include="Test\Reflection\Json\ATest.h" />
     <ClInclude Include="Test\Reflection\Json\JsonTest.h" />
     <ClInclude Include="Test\Component\PlayerComponent.h" />
@@ -244,10 +256,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\a.asset" />
-    <None Include="..\Asset\GameObjectTest.asset">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </None>
     <None Include="Assembly.ps1" />
     <None Include="Reflection.ps1" />
     <None Include="ReflectionFunction.ps1" />

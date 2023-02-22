@@ -3,7 +3,7 @@
 
 namespace Test
 {
-	UCLASS();
+	UCLASS()
 	class PlayerComponent : public Engine::Component
 	{
 		DECLARE_CLASS_INFO(PlayerComponent, Component)

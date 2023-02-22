@@ -1,5 +1,6 @@
 #pragma once
 #include "../Delegate/Delegate.h"
+
 namespace Engine::Event
 {
     template<typename Res, typename... Params>
@@ -36,12 +37,12 @@ namespace Engine::Event
         void RemoveDynamic(Class* _instance, Res(Class::* ptr)(Params...))
         {
             checkBaseOf(Object, Class)
-                typename std::vector<Delegate<Res, Params...>>::iterator it = delegates.begin();
-            for (; it != delegates.end(); ++it)
+                const size_t _size = delegates.size();
+            for (int i = 0; i < _size; i++)
             {
-                if (*it.GetAddress() == (void*&)ptr && *it.Instance() == _instance)
+                if (delegates[i].GetAddress() == (void*&)ptr && delegates[i].Instance() == _instance)
                 {
-                    delegates.erase(it);
+                    delegates.erase(delegates.begin() + i);
                     break;
                 }
             }

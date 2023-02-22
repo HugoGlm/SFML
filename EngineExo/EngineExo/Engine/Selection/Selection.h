@@ -1,22 +1,28 @@
 #pragma once
+#include "../Utils/Singleton/Singleton.h"
 #include "../Object/Object.h"
 #include "../Event/Action/Action.h"
 
 namespace Engine
 {
-	class Selection : public Object
+	class Selection : public Utils::Singleton<Selection>
 	{
-		DECLARE_CLASS_INFO(Selection, Object)
+		DECLARE_CLASS_INFO(Selection, Singleton<Selection>)
 #pragma region f/p
 	private:
-		static inline Object* selected = nullptr;
+		Object* selected = nullptr;
 	public:
 		static inline Action<Object*> OnSelectionChanged = nullptr;
 #pragma endregion
+#pragma region constructor
+	public:
+		Selection() = default;
+#pragma endregion
+
 #pragma region methods
 	public:
-		static void SetSelection(Object* _obj);
-		static Object* GetSelected();
+		void SetSelection(Object* _obj);
+		Object* GetSelected();
 #pragma endregion
 
 	};

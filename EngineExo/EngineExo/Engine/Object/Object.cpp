@@ -92,8 +92,6 @@ void Engine::Object::DeSerialize(std::istream& _is)
 	const size_t _length = _fields.size();
 	for (size_t i = 0; i < _length; i++)
 	{
-		_is.clear();
-		_is.seekg(0);
 		if (_fields[i]->ReflectedObject() == nullptr)
 			continue;
 		if (_fields[i]->IsReflectedClass())
