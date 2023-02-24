@@ -1,24 +1,25 @@
-#pragma once
+﻿#pragma once
 #include "../../Utils/Singleton/Singleton.h"
-#include "../../Window/Engine/EngineWindow.h"
 
 namespace Engine
 {
     class GameObject;
+    namespace Window
+    {
+        class EngineWindow;
+    }
 }
 namespace Engine::Manager
 {
     class GameObjectManager : public Utils::Singleton<GameObjectManager>
     {
         DECLARE_CLASS_INFO(GameObjectManager, Singleton<GameObjectManager>)
-#pragma region var
+#pragma region f/p
     private:
         std::vector<GameObject*> gameobjects = std::vector<GameObject*>();
-#pragma endregion
-#pragma region constructor
+#pragma region f/p
     public:
         GameObjectManager() = default;
-#pragma endregion
 #pragma region methods
     public:
         void Register(GameObject* _object);
@@ -26,8 +27,6 @@ namespace Engine::Manager
         void Update() const;
         void Draw(const Window::EngineWindow* _window) const;
         void OnDestroy() override;
-#pragma endregion
-
+#pragma endregion methods
     };
-
 }

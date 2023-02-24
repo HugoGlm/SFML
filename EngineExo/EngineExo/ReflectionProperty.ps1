@@ -6,7 +6,7 @@ param(
 function IsPublic
 {
     param([string]$line, [boolean]$result)
-    if ($line.Contains("public:"))
+    if ( $line.Contains("public:"))
     {
         return $true
     }
@@ -20,11 +20,11 @@ function IsPublic
 function AddFlag
 {
     param([string]$currentFlag, [string]$newFlag)
-    if ($currentFlag.Contains($newFlag))
+    if ( $currentFlag.Contains($newFlag))
     {
         return $currentFlag
     }
-    if ([string]::IsNullOrEmpty($currentFlag))
+    if ( [string]::IsNullOrEmpty($currentFlag))
     {
         return "BindingFlags::$newFlag"
     }
@@ -65,7 +65,7 @@ Get-ChildItem $path -Recurse -Filter *.h |
                 {
                     $isObject = $true
                 }
-                
+
                 if ($isObject -eq $false)
                 {
                     continue
@@ -93,18 +93,17 @@ Get-ChildItem $path -Recurse -Filter *.h |
                     {
                         $flags = AddFlag -currentFlag $flags -newFlag "Static"
                     }
+
                     $isPointer = $line.Contains("*")
                     $field = ReplaceStr -str $line -toReplace @("inline", "const", "static", "constexpr", "UPROPERTY()") -to ""
                     $field = $field.TrimStart()
-                    if ($field.Contains(">"))
+                    if ( $field.Contains(">"))
                     {
-                        $str = $field.SubString($field.IndexOf(">"))
-                        $str = $str.SubString(0, $str.IndexOf("="))
+                        $str = $field.SubString($field.IndexOf(">"), $field.IndexOf("="))
                         $isPointer = $str.Contains("*")
                     }
                     $field = $field.Substring($field.IndexOf(' ') + 1)
                     $field = $field.Substring(0,$field.IndexOf(' ')).Trim()
-
                     $result = ""
                     if ($isPointer)
                     {

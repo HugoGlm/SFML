@@ -1,5 +1,5 @@
-#pragma once
-#include <SFML/Graphics.hpp>
+﻿#pragma once
+#include <SFML/Window/Event.hpp>
 
 class IPointerClickHandler
 {

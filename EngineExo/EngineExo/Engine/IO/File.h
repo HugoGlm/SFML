@@ -1,26 +1,23 @@
-#pragma once
+﻿#pragma once
 #include "../Object/Object.h"
-#include "../PrimaryType/String/String.h"
-#include <vector>
 
 namespace Engine
 {
-	class File : public Object
-	{
-		DECLARE_CLASS_INFO(File, Object)
+    class File : public Object
+    {
+        DECLARE_CLASS_INFO(File, Object)
 #pragma region f/p
-	private:
-		std::string path = "";
-#pragma endregion
+    private:
+        std::string path = "";
+#pragma endregion f/p
 #pragma region constructor
-	public:
-		File() = delete;
-		File(const std::string& _path);
-#pragma endregion
+    public:
+        File() = delete;
+        File(const std::string& _path);
+#pragma endregion constructor
 #pragma region methods
-	public:
-		std::vector<PrimaryType::String> ReadAllLines() const;
-#pragma endregion
-
-	};
+    public:
+        std::vector<PrimaryType::String> ReadAllLines() const;
+#pragma endregion methods
+    };
 }

@@ -31,7 +31,7 @@ function GetIndex
 
 function IsUClass
 {
-    param([collections.ArrayList] $fileContents)
+    param([Collections.ArrayList] $fileContents)
     for ($i = 0; $i -lt $fileContents.Count; $i = $i + 1)
     {
         if ($fileContents[$i].Contains("UCLASS") -and $fileContents[$i] -notmatch "UCLASS(...)")
@@ -45,27 +45,28 @@ function IsUClass
 function IsForwardedNamespace
 {
     param([Collections.ArrayList]$contents, [Int16]$index)
-    $parenhesisCount = 0
+    $parenthesisCount = 0
     for ($i = $index + 1; $i -lt $contents.Count; $i = $i + 1)
     {
         $line = $contents[$i]
         if ($line.Contains("{"))
         {
-            $parenhesisCount = $parenhesisCount + 1
+            $parenthesisCount = $parenthesisCount + 1
         }
         if ($line.Contains("}"))
         {
-            $parenhesisCount = $parenhesisCount - 1
+            $parenthesisCount = $parenthesisCount - 1
         }
         if ($line.Contains("UCLASS()"))
         {
             return $false
         }
-        if ($parenhesisCount -eq 0)
+        if ($parenthesisCount -eq 0)
         {
             return $true
         }
     }
+    return $false
 }
 
 function Exist
@@ -89,19 +90,19 @@ function GetAllNamespaces
     {
         $fullPath = $allUClass[$x]
         $className = (Get-Item $fullPath).BaseName
-        $fileContents = (Get-Content -path $fullPath) -as [Collections.ArrayList]
+        $fileContents = (Get-Content -Path $fullPath) -as [Collections.ArrayList]
         $currentNamespace = ""
         for ($i = 0; $i -lt $fileContents.Count; $i = $i + 1)
         {
             $line = $fileContents[$i]
-            if ($line.contains("namespace"))
+            if ( $line.Contains("namespace"))
             {
                 $isFowarded = IsForwardedNamespace -contents $fileContents -index $i
-                if (-not $isFowarded)
+                if (-not$isFowarded)
                 {
                     $namespace = $line.Replace("namespace", "").Trim()
 
-                    if ([string]::IsNullOrEmpty($currentNamespace))
+                    if ( [string]::IsNullOrEmpty($currentNamespace))
                     {
                         $currentNamespace = $namespace
                     }
@@ -133,15 +134,15 @@ function GetAllNamespaces
 function GetAllUClass
 {
     $uclass = New-Object Collections.Generic.List[string]
-    Get-ChildItem $path -Recurse -Filter *.h | 
-    ForEach-Object{
-        $fullpath = $_.FullName
-        $fileContents = (Get-Content $fullPath) -as [Collections.ArrayList]
-        if (IsUClass -fileContents $fileContents)
-        {
-            $uclass.Add($fullPath)
-        }
-    }
+    Get-ChildItem $path -Recurse -Filter *.h |
+            ForEach-Object {
+                $fullPath = $_.FullName
+                $fileContents = (Get-Content -Path $fullPath) -as [Collections.ArrayList]
+                if (IsUClass -fileContents $fileContents)
+                {
+                    $uclass.Add($fullPath)
+                }
+            }
     return $uclass
 }
 
@@ -153,7 +154,7 @@ function CreateFile
     foreach ($h in $allDatas)
     {
         $namespace = $h.namespace
-        $result += "`nusing namespace $namespace;`n`n"
+        $result += "using namespace $namespace;`n`n"
         $classes = $h.classes
         for ($i = 0; $i -lt $classes.Count; $i = $i + 1)
         {

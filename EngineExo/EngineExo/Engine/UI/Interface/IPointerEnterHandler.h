@@ -1,8 +1,8 @@
-#pragma once
+﻿#pragma once
 
 class IPointerEnterHandler
 {
 public:
-	virtual ~IPointerEnterHandler() = default;
-	virtual void OnPointerEnter() = 0;
+    virtual ~IPointerEnterHandler() = default;
+    virtual void OnPointerEnter() = 0;
 };

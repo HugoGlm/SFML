@@ -1,11 +1,14 @@
-#pragma once
+﻿#pragma once
+#include "../../../Engine/Object/Object.h"
 
 namespace Test
 {
-	class IntegerTest
-	{
-	public:
-		static void Test();
-	};
+    UCLASS()
+    class IntegerTest : public Engine::Object
+    {
+        DECLARE_CLASS_INFO(IntegerTest, Object)
+    public:
+        static void Test();
+        IntegerTest() = default;
+    };
 }
-
